@@ -14,4 +14,4 @@ jobs:
         docker build --pull -t "tomcraftmc/fsalist:nginx" -f ./docker/nginx/Dockerfile .
         docker push "tomcraftmc/fsalist:nginx"
         docker build --pull -t "tomcraftmc/fsalist:php-fpm" -f ./docker/php-fpm/Dockerfile .
-        docker push $tomcraftmc/fsalist:php-fpm"
+        docker push "tomcraftmc/fsalist:php-fpm"
