@@ -1,2 +1,27 @@
-homepage:
-  title: 'Titre de la page'
+global:
+  i-agree-to: J'accepte la
+  privacy-policy: Politique de confidentialité
+  back: Retour
+error:
+  404: La page que vous cherchez n'est pas disponible
+  403: L'accès à cette page a été bloqué
+  standard: 'Une erreur innattendue est survenue: '
+contact:
+  title: Formulaire de contact
+  name: Votre nom
+  email: Adresse email
+  subject: Sujet
+  text-hint: Ecrivez votre message...
+  send: Envoyer
+auth:
+  email: Adresse mail
+  password: Mot de passe
+  username: Surnom
+  remember-me: Se souvenir de moi
+  forgot-password: Mot de passe oublié ?
+  sign-in: Se connecter
+  sign-up: S'inscrire
+  forgot: Réinitialiser
+  forgot-notice: Nous vous enverrons un lien par email
+  already-registered-notice: Déjà inscrit ?
+  not-registered-yet-notice: Pas encore inscrit ?

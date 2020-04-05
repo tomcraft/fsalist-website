@@ -1,0 +1,11 @@
+{% extends 'auth/base.html.twig' %}
+
+{% block content %}
+    <div class="sign__group">
+        <input type="text" class="sign__input" placeholder="{{ 'auth.email'|trans }}">
+    </div>
+
+    <button class="sign__btn" type="button">{{ 'auth.forgot'|trans }}</button>
+
+    <span class="sign__text">{{ 'auth.forgot-notice'|trans }}</span>
+{% endblock content %}

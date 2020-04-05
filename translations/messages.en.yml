@@ -1,2 +1,27 @@
-homepage:
-  title: 'Title of the page'
+global:
+  i-agree-to: I agree to the
+  privacy-policy: Privacy Policy
+  back: Go back
+error:
+  404: The page you are looking for is not available!
+  403: You can't access this page
+  standard: 'An unexpected error happened: '
+contact:
+  title: Contact form
+  name: Your Name
+  email: Email
+  subject: Subject
+  text-hint: Type your message...
+  send: Send
+auth:
+  email: Email
+  password: Password
+  username: Username
+  remember-me: Remember Me
+  forgot-password: Forgot password?
+  sign-in: Sign in
+  sign-up: Sign up
+  forgot: Reset password
+  forgot-notice: We will send a password reset link to your Email
+  already-registered-notice: Already have an account?
+  not-registered-yet-notice: Don't have an account?

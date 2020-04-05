@@ -1,0 +1,24 @@
+{% extends 'auth/base.html.twig' %}
+
+{% block content %}
+    <div class="sign__group">
+        <input type="text" class="sign__input" placeholder="{{ 'auth.username'|trans }}">
+    </div>
+
+    <div class="sign__group">
+        <input type="text" class="sign__input" placeholder="{{ 'auth.email'|trans }}">
+    </div>
+
+    <div class="sign__group">
+        <input type="password" class="sign__input" placeholder="{{ 'auth.password'|trans }}">
+    </div>
+
+    <div class="sign__group sign__group--checkbox">
+        <input id="remember" name="remember" type="checkbox" checked="checked">
+        <label for="remember">{{ 'global.i-agree-to'|trans }} <a href="{{ path('privacy') }}">{{ 'global.privacy-policy'|trans }}</a></label>
+    </div>
+
+    <button class="sign__btn" type="button">{{ 'auth.sign-up'|trans }}</button>
+
+    <span class="sign__text">{{ 'auth.already-registered-notice'|trans }} <a href="{{ path('sign-in') }}">{{ 'auth.sign-in'|trans }}!</a></span>
+{% endblock content %}
