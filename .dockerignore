@@ -1,6 +1,4 @@
-.env
-.env.dev
-.env.prod
+.env.*
 .dockerignore
 **/Dockerfile
 docker-compose*
