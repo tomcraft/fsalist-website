@@ -1,0 +1,27 @@
+<!-- footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="footer__content">
+                    <a href="{{ path('homepage') }}" class="footer__logo">
+                        <img src="{{ asset('img/logo.svg') }}" alt="">
+                    </a>
+
+                    <span class="footer__copyright">© 2020 FSAList</span>
+
+                    <nav class="footer__nav">
+                        <a href="about.html">About Us</a>
+                        <a href="{{ path('contact') }}">Contacts</a>
+                        <a href="{{ path('privacy') }}">{{ 'global.privacy-policy'|trans }}</a>
+                    </nav>
+
+                    <button class="footer__back" type="button">
+                        <i class="icon ion-ios-arrow-round-up"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->

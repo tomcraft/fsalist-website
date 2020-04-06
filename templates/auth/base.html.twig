@@ -1,0 +1,19 @@
+{% include '/base-empty.html.twig' %}
+{% block body %}
+    <div class="sign section--bg" data-bg="{{ asset('img/section/section.jpg') }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="sign__content">
+                        <form action="#" class="sign__form">
+                            <a href="{{ path('homepage') }}" class="sign__logo">
+                                <img src="{{ asset('img/logo.svg') }}" alt="">
+                            </a>
+                            {% block content %}{% endblock content %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

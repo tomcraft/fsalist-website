@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    image: fsalist/nginx:local
+    container_name: nginx_fsalist
+    depends_on:
+      - php-fpm
+    ports:
+      - 8080:80
+
+  php-fpm:
+    build:
+      context: .
+      dockerfile: ./docker/php-fpm/Dockerfile
+    image: fsalist/php-fpm:local
+    container_name: fsalist
+    env_file:
+      - .env.local
