@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  nginx:
+    image: tomcraftmc/fsalist:nginx-master
+    container_name: nginx_fsalist
+    ports:
+      - 80:80
+    depends_on:
+      - php-fpm
+
+  php-fpm:
+    image: tomcraftmc/fsalist:php-fpm-master
+    container_name: fsalist
+    env_file: .env.prod

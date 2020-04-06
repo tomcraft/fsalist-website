@@ -6,17 +6,17 @@ services:
       context: .
       dockerfile: ./docker/nginx/Dockerfile
     image: fsalist/nginx:local
-    container_name: nginx_fsalist
+    container_name: nginx_fsalist_local
     depends_on:
       - php-fpm
     ports:
-      - 8080:80
+      - 8000:80
 
   php-fpm:
     build:
       context: .
       dockerfile: ./docker/php-fpm/Dockerfile
     image: fsalist/php-fpm:local
-    container_name: fsalist
+    container_name: fsalist_local
     env_file:
       - .env.local

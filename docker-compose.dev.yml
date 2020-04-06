@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  nginx:
+    image: tomcraftmc/fsalist:nginx-develop
+    container_name: nginx_fsalist_dev
+    ports:
+      - 80:80
+    depends_on:
+      - php-fpm
+
+  php-fpm:
+    image: tomcraftmc/fsalist:php-fpm-develop
+    container_name: fsalist_dev
+    env_file: .env.dev
