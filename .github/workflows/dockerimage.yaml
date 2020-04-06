@@ -11,8 +11,8 @@ jobs:
     
     - name: Build the Docker images
       run:  |
-        docker build --pull -t "tomcraftmc/fsalist:nginx-${GITHUB_REF##*/}" -f ./docker/nginx/Dockerfile .
-        docker build --pull -t "tomcraftmc/fsalist:php-fpm-${GITHUB_REF##*/}" -f ./docker/php-fpm/Dockerfile .
+        docker build -t "tomcraftmc/fsalist:nginx-${GITHUB_REF##*/}" -f ./docker/nginx/Dockerfile .
+        docker build -t "tomcraftmc/fsalist:php-fpm-${GITHUB_REF##*/}" -f ./docker/php-fpm/Dockerfile .
         
     - name: Push the Docker images
       run:  |
