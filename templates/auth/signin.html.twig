@@ -16,7 +16,7 @@
 
     <button class="sign__btn" type="button">{{ 'auth.sign-in'|trans }}</button>
 
-    <span class="sign__text">{{ 'auth.not-registered-yet-notice'|trans }} <a href="{{ path('sign-up') }}">{{ 'auth.sign-up'|trans }}!</a></span>
+    <span class="sign__text">{{ 'auth.not-registered-yet-notice'|trans({'signUrl': path('sign-up')})|raw }}</span>
 
     <span class="sign__text"><a href="{{ path('forgot-password') }}">{{ 'auth.forgot-password'|trans }}</a></span>
 {% endblock content %}

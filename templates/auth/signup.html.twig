@@ -15,10 +15,10 @@
 
     <div class="sign__group sign__group--checkbox">
         <input id="remember" name="remember" type="checkbox" checked="checked">
-        <label for="remember">{{ 'global.i-agree-to'|trans }} <a href="{{ path('privacy') }}">{{ 'global.privacy-policy'|trans }}</a></label>
+        <label for="remember">{{ 'auth.privacy-policy-agreement'|trans({'url': path('privacy')})|raw }}</a></label>
     </div>
 
     <button class="sign__btn" type="button">{{ 'auth.sign-up'|trans }}</button>
 
-    <span class="sign__text">{{ 'auth.already-registered-notice'|trans }} <a href="{{ path('sign-in') }}">{{ 'auth.sign-in'|trans }}!</a></span>
+    <span class="sign__text">{{ 'auth.already-registered-notice'|trans({'signUrl': path('sign-in')})|raw }}</span>
 {% endblock content %}

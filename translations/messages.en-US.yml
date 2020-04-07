@@ -1,7 +1,8 @@
 global:
-  i-agree-to: I agree to the
   privacy-policy: Privacy Policy
   back: Go back
+homepage:
+  now-playing: <b>CURRENTLY</b> IN THEATERS
 error:
   404: The page you are looking for is not available!
   403: You can't access this page
@@ -23,5 +24,6 @@ auth:
   sign-up: Sign up
   forgot: Reset password
   forgot-notice: We will send a password reset link to your Email
-  already-registered-notice: Already have an account?
-  not-registered-yet-notice: Don't have an account?
+  already-registered-notice: Already have an account? <a href="signUrl">Sign in!</a>
+  not-registered-yet-notice: Don't have an account yet? <a href="signUrl">Sign up!</a>
+  privacy-policy-agreement: I agree to the <a href="policyUrl">Privacy Policy</a>

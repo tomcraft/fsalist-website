@@ -1676,6 +1676,9 @@ ul {
 .card__rate--green {
   border-color: #48ee3b;
 }
+.card__rate--orange {
+  border-color: #fd9930;
+}
 .card__rate--red {
   border-color: #fd6060;
 }

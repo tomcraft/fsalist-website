@@ -73,10 +73,10 @@
 
                         <!-- dropdown -->
                         <div class="dropdown header__lang">
-                            <a class="dropdown-toggle header__nav-link" href="#" role="button" id="dropdownMenuLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ app.request.locale }}</a>
+                            <a class="dropdown-toggle header__nav-link" href="#" role="button" id="dropdownMenuLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ app.request.locale|split('-')[0] }}</a>
 
                             <ul class="dropdown-menu header__dropdown-menu" aria-labelledby="dropdownMenuLang">
-                                {% for langue, code in {'Français': 'fr', 'English': 'en'} %}
+                                {% for langue, code in {'Français': 'fr-FR', 'English': 'en-US'} %}
                                 <li><a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': code})) }}">{{ langue }}</a></li>
                                 {% endfor %}
                             </ul>

@@ -1,7 +1,8 @@
 global:
-  i-agree-to: J'accepte la
   privacy-policy: Politique de confidentialité
   back: Retour
+homepage:
+  now-playing: <b>ACTUELLEMENT</b> EN SALLES
 error:
   404: La page que vous cherchez n'est pas disponible
   403: L'accès à cette page a été bloqué
@@ -23,5 +24,6 @@ auth:
   sign-up: S'inscrire
   forgot: Réinitialiser
   forgot-notice: Nous vous enverrons un lien par email
-  already-registered-notice: Déjà inscrit ?
-  not-registered-yet-notice: Pas encore inscrit ?
+  already-registered-notice: Déjà inscrit ? <a href="signUrl">Connectez-vous !</a>
+  not-registered-yet-notice: Pas encore inscrit ? <a href="signUrl">Créez un compte !</a>
+  privacy-policy-agreement: J'accepte la <a href="policyUrl">politique de confidentialité</a>
