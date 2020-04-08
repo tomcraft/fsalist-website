@@ -30,11 +30,11 @@ class Scrapper
     }
 
     public static function cache(string $url, array $options = []) {
-        return self::get($url, $options)->getBody();
+        return json_decode(self::get($url, $options)->getBody());
     }
 
     public static function imageUrl(string $relativeUrl, string $size = 'original') {
-        return "https://image.tmdb.org/t/p/$size/$relativeUrl";
+        return "https://image.tmdb.org/t/p/$size$relativeUrl";
     }
 
     private static function regionFromLang(string $lang) {
@@ -46,7 +46,7 @@ class Scrapper
 
     public static function movieGenres(string $lang = 'fr-FR') {
         $data = array();
-        $genres = json_decode(self::cache("genre/movie/list?language=$lang"))->genres;
+        $genres = self::cache("genre/movie/list?language=$lang")->genres;
         foreach ($genres as $genre) {
             $data[$genre->id] = $genre->name;
         }
@@ -86,26 +86,34 @@ class Scrapper
         return self::cache("movie/$movieId/videos?language=$lang");
     }
 
-    public static function movieSimilar(int $movieId, int $page = 1, string $lang = 'fr-FR') {
+    public static function movieCredits(int $movieId) {
+        return self::cache("movie/$movieId/credits");
+    }
+
+    public static function movieSimilar(int $movieId, string $lang = 'fr-FR', int $page = 1) {
         return self::cache("movie/$movieId/similar?language=$lang&page=$page");
     }
 
-    public static function nowPlayingMovies(int $page = 1, string $lang = 'fr-FR', string $region = null) {
+    public static function movieRecommendations(int $movieId, string $lang = 'fr-FR', int $page = 1) {
+        return self::cache("movie/$movieId/recommendations?language=$lang&page=$page");
+    }
+
+    public static function nowPlayingMovies(string $lang = 'fr-FR', int $page = 1, string $region = null) {
         if($region == null) $region = self::regionFromLang($lang);
         return self::cache("movie/now_playing?language=$lang&region=$region&page=$page");
     }
 
-    public static function popularMovies(int $page = 1, string $lang = 'fr-FR', string $region = null) {
+    public static function popularMovies(string $lang = 'fr-FR', int $page = 1, string $region = null) {
         if($region == null) $region = self::regionFromLang($lang);
         return self::cache("movie/popular?language=$lang&region=$region&page=$page");
     }
 
-    public static function topRatedMovies(int $page = 1, string $lang = 'fr-FR', string $region = null) {
+    public static function topRatedMovies(string $lang = 'fr-FR', int $page = 1, string $region = null) {
         if($region == null) $region = self::regionFromLang($lang);
         return self::cache("movie/top_rated?language=$lang&region=$region&page=$page");
     }
 
-    public static function upcomingMovies(int $page = 1, string $lang = 'fr-FR', string $region = null) {
+    public static function upcomingMovies(string $lang = 'fr-FR', int $page = 1, string $region = null) {
         if($region == null) $region = self::regionFromLang($lang);
         return self::cache("movie/upcoming?language=$lang&region=$region&page=$page");
     }

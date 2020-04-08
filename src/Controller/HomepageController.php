@@ -20,13 +20,13 @@ class HomepageController extends AbstractController
     public function index(Request $request)
     {
         $locale = $request->getLocale();
-        $popularMovies = Scrapper::nowPlayingMovies(1, $locale);
-        $upcomingMovies = Scrapper::upcomingMovies(1, $locale);
+        $popularMovies = Scrapper::nowPlayingMovies($locale);
+        $upcomingMovies = Scrapper::upcomingMovies($locale);
         $movieGenres = Scrapper::movieGenres($locale);
 
         return $this->render('homepage.html.twig', [
-            'popularMovies' => json_decode($popularMovies)->results,
-            'upcomingMovies' => json_decode($upcomingMovies)->results,
+            'popularMovies' => $popularMovies->results,
+            'upcomingMovies' => $upcomingMovies->results,
             'movieGenres' => $movieGenres,
         ]);
     }

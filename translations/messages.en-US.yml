@@ -1,6 +1,7 @@
 global:
   privacy-policy: Privacy Policy
   back: Go back
+  send: Send
 homepage:
   now-playing: <b>CURRENTLY</b> IN THEATERS
 error:
@@ -13,7 +14,6 @@ contact:
   email: Email
   subject: Subject
   text-hint: Type your message...
-  send: Send
 auth:
   email: Email
   password: Password
@@ -27,3 +27,18 @@ auth:
   already-registered-notice: Already have an account? <a href="signUrl">Sign in!</a>
   not-registered-yet-notice: Don't have an account yet? <a href="signUrl">Sign up!</a>
   privacy-policy-agreement: I agree to the <a href="policyUrl">Privacy Policy</a>
+details:
+  director: Director
+  casting: Cast
+  genre: Genre
+  release-year: Release year
+  running-time: Running time
+  origin-country: Country
+  recommendations: You may also like...
+  discover: Discover
+  comments: Comments
+  reviews: Reviews
+  review-title: Title
+  review-text: Your review...
+  review-rate: Rate
+  pictures: Photos

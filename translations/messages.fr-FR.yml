@@ -1,6 +1,7 @@
 global:
   privacy-policy: Politique de confidentialité
   back: Retour
+  send: Envoyer
 homepage:
   now-playing: <b>ACTUELLEMENT</b> EN SALLES
 error:
@@ -13,7 +14,6 @@ contact:
   email: Adresse email
   subject: Sujet
   text-hint: Ecrivez votre message...
-  send: Envoyer
 auth:
   email: Adresse mail
   password: Mot de passe
@@ -27,3 +27,18 @@ auth:
   already-registered-notice: Déjà inscrit ? <a href="signUrl">Connectez-vous !</a>
   not-registered-yet-notice: Pas encore inscrit ? <a href="signUrl">Créez un compte !</a>
   privacy-policy-agreement: J'accepte la <a href="policyUrl">politique de confidentialité</a>
+details:
+  director: Réalisateur
+  casting: Casting
+  genre: Genre
+  release-year: Année de sortie
+  running-time: Durée
+  origin-country: Pays d'origine
+  recommendations: Vous aimerez peut-être...
+  discover: En découvrir plus
+  comments: Discussion
+  reviews: Critiques
+  review-title: Titre
+  review-text: Votre critique...
+  review-rate: Note
+  pictures: Photos
