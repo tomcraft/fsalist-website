@@ -20,8 +20,11 @@ class ScrapperExtension extends AbstractExtension
         ];
     }
 
-    public function mediaURL(string $relativeUrl, string $size = 'original')
+    public function mediaURL($relativeUrl, string $size = 'original')
     {
+        if ($relativeUrl == null || $relativeUrl == '') {
+            return '/img/covers/unknown.jpg';
+        }
         return Scrapper::imageUrl($relativeUrl, $size);
     }
 

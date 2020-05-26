@@ -121,7 +121,7 @@
                         <div class="col-6 col-sm-4 col-md-3 col-xl-2">
                             <div class="card">
                                 <div class="card__cover">
-                                    <img src="{{ movie.poster_path != null ? movie.poster_path|mediaURL('w342') : asset('img/covers/unknown.jpg') }}" alt="">
+                                    <img src="{{ movie.poster_path|mediaURL('w342') }}" alt="">
                                     <a href="#" class="card__play">
                                         <i class="icon ion-ios-play"></i>
                                     </a>
