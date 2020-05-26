@@ -19,9 +19,9 @@ auth:
   password: Mot de passe
   username: Surnom
   remember-me: Se souvenir de moi
-  forgot-password: Mot de passe oublié ?
-  sign-in: Se connecter
-  sign-up: S'inscrire
+  reset-password: Mot de passe oublié ?
+  login: Se connecter
+  register: S'inscrire
   forgot: Réinitialiser
   forgot-notice: Nous vous enverrons un lien par email
   already-registered-notice: Déjà inscrit ? <a href="signUrl">Connectez-vous !</a>

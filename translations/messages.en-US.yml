@@ -19,9 +19,9 @@ auth:
   password: Password
   username: Username
   remember-me: Remember Me
-  forgot-password: Forgot password?
-  sign-in: Sign in
-  sign-up: Sign up
+  reset-password: Forgot password?
+  login: Login
+  register: Register
   forgot: Reset password
   forgot-notice: We will send a password reset link to your Email
   already-registered-notice: Already have an account? <a href="signUrl">Sign in!</a>
