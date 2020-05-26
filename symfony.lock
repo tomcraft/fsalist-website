@@ -75,17 +75,8 @@
     "doctrine/reflection": {
         "version": "1.2.1"
     },
-    "easycorp/easy-log-handler": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "70062abc2cd58794d2a90274502f81b55cd9951b"
-        },
-        "files": [
-            "./config/packages/dev/easy_log_handler.yaml"
-        ]
+    "doctrine/sql-formatter": {
+        "version": "1.0.1"
     },
     "egulias/email-validator": {
         "version": "2.1.17"
@@ -98,9 +89,6 @@
     },
     "guzzlehttp/psr7": {
         "version": "1.6.1"
-    },
-    "jdorn/sql-formatter": {
-        "version": "v1.2.17"
     },
     "laminas/laminas-code": {
         "version": "3.4.1"
@@ -256,9 +244,6 @@
             "./.env"
         ]
     },
-    "symfony/form": {
-        "version": "v5.0.7"
-    },
     "symfony/framework-bundle": {
         "version": "4.4",
         "recipe": {
@@ -349,9 +334,6 @@
         "files": [
             "./config/packages/notifier.yaml"
         ]
-    },
-    "symfony/options-resolver": {
-        "version": "v5.0.7"
     },
     "symfony/orm-pack": {
         "version": "v1.0.8"
