@@ -6,8 +6,8 @@
         {{ form_errors(registrationForm, {'attr': {'class': 'your-class'}}) }}
 
         <div class="sign__group">
-            {{ form_widget(registrationForm.username, { 'attr': {'class': 'sign__input', 'placeholder': 'auth.username' } }) }}
-            {{ form_errors(registrationForm.username) }}
+            {{ form_widget(registrationForm.displayName, { 'attr': {'class': 'sign__input', 'placeholder': 'auth.username' } }) }}
+            {{ form_errors(registrationForm.displayName) }}
         </div>
 
         <div class="sign__group">
