@@ -2,6 +2,8 @@ global:
   privacy-policy: Politique de confidentialité
   back: Retour
   send: Envoyer
+  save: Enregister
+  change: Modifier
 homepage:
   now-playing: <b>ACTUELLEMENT</b> EN SALLES
 error:
@@ -21,6 +23,7 @@ auth:
   remember-me: Se souvenir de moi
   reset-password: Mot de passe oublié ?
   login: Se connecter
+  logout: Se déconnecter
   register: S'inscrire
   forgot: Réinitialiser
   forgot-notice: Nous vous enverrons un lien par email

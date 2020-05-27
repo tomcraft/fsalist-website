@@ -2,6 +2,8 @@ global:
   privacy-policy: Privacy Policy
   back: Go back
   send: Send
+  save: Save
+  change: Change
 homepage:
   now-playing: <b>CURRENTLY</b> IN THEATERS
 error:
@@ -21,6 +23,7 @@ auth:
   remember-me: Remember Me
   reset-password: Forgot password?
   login: Login
+  logout: Logout
   register: Register
   forgot: Reset password
   forgot-notice: We will send a password reset link to your Email

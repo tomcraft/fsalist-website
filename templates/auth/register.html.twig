@@ -3,6 +3,7 @@
 {% block content %}
 
     {{ form_start(registrationForm) }}
+    {% include 'auth/logo.html.twig' %}
         {{ form_errors(registrationForm, {'attr': {'class': 'your-class'}}) }}
 
         <div class="sign__group">

@@ -84,7 +84,7 @@
                         <!-- end dropdown -->
 
                         {% if app.user %}
-                            <img class= "header__avatar" src="{{ gravatar(app.user.email, 80, 'https://fsalist.com/img/user.png') }}" alt="profile picture" >
+                            <a href="{{ path('profile') }}"><img class= "header__avatar" src="{{ gravatar(app.user.email, 80, 'https://fsalist.com/img/user.png') }}" alt="profile picture"></a>
                         {% else %}
                             <a href="{{ path('login') }}" class="header__sign-in">
                                 <i class="icon ion-ios-log-in"></i>
