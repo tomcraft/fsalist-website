@@ -83,10 +83,15 @@
                         </div>
                         <!-- end dropdown -->
 
-                        <a href="{{ path('login') }}" class="header__sign-in">
-                            <i class="icon ion-ios-log-in"></i>
-                            <span>{{ 'auth.login'|trans }}</span>
-                        </a>
+                        {% if app.user %}
+                            <img class= "header__avatar" src="{{ gravatar(app.user.email, 80, 'https://fsalist.com/img/user.png') }}" alt="profile picture" >
+                        {% else %}
+                            <a href="{{ path('login') }}" class="header__sign-in">
+                                <i class="icon ion-ios-log-in"></i>
+                                <span>{{ 'auth.login'|trans }}</span>
+                            </a>
+                        {% endif %}
+
                     </div>
                     <!-- end header auth -->
 
