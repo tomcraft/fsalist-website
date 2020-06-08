@@ -259,15 +259,17 @@
                                         </ul>
 
                                         {% if app.user %}
-                                        <form action="#" class="form">
-                                            <input type="text" class="form__input" placeholder="{{ 'details.review-title'|trans }}">
-                                            <textarea class="form__textarea" placeholder="{{ 'details.review-text'|trans }}"></textarea>
+                                            {{ form_start(reviewForm, {'attr': {'id': 'review-form', 'class': 'form'}}) }}
+                                            {{ form_widget(reviewForm.title, {'attr': {'class': 'form__input', 'placeholder': 'details.review-title'}}) }}
+                                            {{ form_widget(reviewForm.text, {'attr': {'class': 'form__textarea', 'placeholder': 'details.review-text'}}) }}
                                             <div class="form__slider">
                                                 <div class="form__slider-rating" id="slider__rating"></div>
                                                 <div class="form__slider-value" id="form__slider-value"></div>
                                             </div>
-                                            <button type="button" class="form__btn">{{ 'global.send'|trans }}</button>
-                                        </form>
+                                            {{ form_widget(reviewForm.rate) }}
+
+                                            <button type="submit" class="form__btn">{{ 'global.send'|trans }}</button>
+                                            {{ form_end(reviewForm) }}
                                         {% endif %}
                                     </div>
                                 </div>

@@ -9,6 +9,8 @@ use App\Entity\MediaReview;
 use App\Repository\MediaReviewRepository;
 use App\Repository\Scrapper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,6 +25,13 @@ class MediaController extends AbstractController
      */
     public function movieDetails(Request $request, int $movieId)
     {
+        $media = new MediaReview();
+        $reviewForm = $this->createFormBuilder($media)
+            ->add('title')
+            ->add('text', TextareaType::class)
+            ->add('rate', HiddenType::class)
+            ->getForm();
+
         $locale = $request->getLocale();
         $movieGenres = Scrapper::movieGenres($locale);
         $details = Scrapper::movieDetails($movieId, $locale);
@@ -35,6 +44,21 @@ class MediaController extends AbstractController
         $videos = Scrapper::movieVideos($movieId, $locale);
         $commentRepository = $this->getDoctrine()->getRepository(MediaComment::class);
         $reviewRepository = $this->getDoctrine()->getRepository(MediaReview::class);
+
+        $reviewForm->handleRequest($request);
+
+        if ($reviewForm->isSubmitted() && $reviewForm->isValid()) {
+            $media->setCreatedAt(new \DateTime());
+            $media->setAuthor($this->getUser());
+            $media->setMediaId($movieId);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($media);
+            $entityManager->flush();
+
+            return $this->redirect($request->getUri());
+        }
+
         return $this->render('media/movie-details.html.twig', [
             'movie' => $details,
             'credits' => $credits,
@@ -43,7 +67,8 @@ class MediaController extends AbstractController
             'images' => $images,
             'videos' => $videos->results,
             'comments' => $commentRepository->findBy(['mediaId' => $movieId], ['created_at' => 'DESC']),
-            'reviews' => $reviewRepository->findBy(['mediaId' => $movieId], ['created_at' => 'DESC'])
+            'reviews' => $reviewRepository->findBy(['mediaId' => $movieId], ['created_at' => 'DESC']),
+            'reviewForm' => $reviewForm->createView()
         ]);
     }
 }

@@ -503,10 +503,12 @@ $(document).ready(function () {
 				})
 			});
 
-			var thirdValue = document.getElementById('form__slider-value');
+			const thirdValue = document.getElementById('form__slider-value');
+			const inputSlider = document.getElementById('form_rate');
 
 			thirdSlider.noUiSlider.on('update', function( values, handle ) {
 				thirdValue.innerHTML = values[handle];
+				inputSlider.value = values[handle];
 			});
 		} else {
 			return false;
