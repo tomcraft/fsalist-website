@@ -60,7 +60,7 @@
                     <div class="row">
                         <!-- details form -->
                         <div class="col-12 col-lg-6">
-                            <form action="#" class="profile__form">
+                            {{ form_start(detailsForm, {'attr': {'id': 'details-form', 'class': 'profile__form'}}) }}
                                 <div class="row">
                                     <div class="col-12">
                                         <h4 class="profile__title">{{ 'profile.details.title'|trans }}</h4>
@@ -68,43 +68,43 @@
 
                                     <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                         <div class="profile__group">
-                                            <label class="profile__label" for="username">{{ 'profile.details.username'|trans }}</label>
-                                            <input id="username" type="text" name="username" class="profile__input" placeholder="johndoe98" value="{{ app.user.displayName }}">
+                                            {{ form_label(detailsForm.displayName, 'profile.details.username', {'label_attr': {'class': 'profile__label'}}) }}
+                                            {{ form_widget(detailsForm.displayName, {'attr': {'class': 'profile__input', 'placeholder': 'johndoe98'}}) }}
                                         </div>
                                     </div>
 
                                     <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                         <div class="profile__group">
-                                            <label class="profile__label" for="email">{{ 'profile.details.email'|trans }}</label>
-                                            <input id="email" type="text" name="email" class="profile__input" placeholder="john.doe@yahoo.com" value="{{ app.user.email }}">
+                                            {{ form_label(detailsForm.email, 'profile.details.email', {'label_attr': {'class': 'profile__label'}}) }}
+                                            {{ form_widget(detailsForm.email, {'attr': {'class': 'profile__input', 'placeholder': 'john.doe@yahoo.com'}}) }}
                                         </div>
                                     </div>
 
                                     <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                         <div class="profile__group">
-                                            <label class="profile__label" for="firstname">{{ 'profile.details.first-name'|trans }}</label>
-                                            <input id="firstname" type="text" name="firstname" class="profile__input" placeholder="John">
+                                            {{ form_label(detailsForm.firstName, 'profile.details.first-name', {'label_attr': {'class': 'profile__label'}}) }}
+                                            {{ form_widget(detailsForm.firstName, {'attr': {'class': 'profile__input', 'placeholder': 'John'}}) }}
                                         </div>
                                     </div>
 
                                     <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                         <div class="profile__group">
-                                            <label class="profile__label" for="lastname">{{ 'profile.details.last-name'|trans }}</label>
-                                            <input id="lastname" type="text" name="lastname" class="profile__input" placeholder="Doe">
+                                            {{ form_label(detailsForm.lastName, 'profile.details.last-name', {'label_attr': {'class': 'profile__label'}}) }}
+                                            {{ form_widget(detailsForm.lastName, {'attr': {'class': 'profile__input', 'placeholder': 'Doe'}}) }}
                                         </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <button class="profile__btn" type="button">{{ 'global.save'|trans }}</button>
+                                        <button class="profile__btn" type="submit">{{ 'global.save'|trans }}</button>
                                     </div>
                                 </div>
-                            </form>
+                            {{ form_end(detailsForm) }}
                         </div>
                         <!-- end details form -->
 
                         <!-- password form -->
                         <div class="col-12 col-lg-6">
-                            <form action="#" class="profile__form">
+                                {{ form_start(passwordForm, {'attr': {'id': 'password-form', 'class': 'profile__form'}}) }}
                                 <div class="row">
                                     <div class="col-12">
                                         <h4 class="profile__title">{{ 'profile.change-password.title'|trans }}</h4>
@@ -112,30 +112,30 @@
 
                                     <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                         <div class="profile__group">
-                                            <label class="profile__label" for="oldpass">{{ 'profile.change-password.old'|trans }}</label>
-                                            <input id="oldpass" type="password" name="oldpass" class="profile__input">
+                                            {{ form_label(passwordForm.password, 'profile.change-password.old', {'label_attr': {'class': 'profile__label'}}) }}
+                                            {{ form_widget(passwordForm.password, {'attr': {'class': 'profile__input'}}) }}
                                         </div>
                                     </div>
 
                                     <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                         <div class="profile__group">
-                                            <label class="profile__label" for="newpass">{{ 'profile.change-password.new'|trans }}</label>
-                                            <input id="newpass" type="password" name="newpass" class="profile__input">
+                                            {{ form_label(passwordForm.newPassword, 'profile.change-password.new', {'label_attr': {'class': 'profile__label'}}) }}
+                                            {{ form_widget(passwordForm.newPassword, {'attr': {'class': 'profile__input'}}) }}
                                         </div>
                                     </div>
 
                                     <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                                         <div class="profile__group">
-                                            <label class="profile__label" for="confirmpass">{{ 'profile.change-password.new-confirm'|trans }}</label>
-                                            <input id="confirmpass" type="password" name="confirmpass" class="profile__input">
+                                            {{ form_label(passwordForm.confirmPassword, 'profile.change-password.new-confirm', {'label_attr': {'class': 'profile__label'}}) }}
+                                            {{ form_widget(passwordForm.confirmPassword, {'attr': {'class': 'profile__input'}}) }}
                                         </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <button class="profile__btn" type="button">{{ 'global.change'|trans }}</button>
+                                        <button class="profile__btn" type="submit">{{ 'global.change'|trans }}</button>
                                     </div>
                                 </div>
-                            </form>
+                            {{ form_end(passwordForm) }}
                         </div>
                         <!-- end password form -->
                     </div>
