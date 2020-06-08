@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -40,6 +42,22 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $displayName;
+
+    /**
+     * @ORM\OneToMany(targetEntity=MediaReview::class, mappedBy="user")
+     */
+    private $mediaReviews;
+
+    /**
+     * @ORM\OneToMany(targetEntity=MediaComment::class, mappedBy="user")
+     */
+    private $mediaComments;
+
+    public function __construct()
+    {
+        $this->mediaReviews = new ArrayCollection();
+        $this->mediaComments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -127,6 +145,68 @@ class User implements UserInterface
     public function setDisplayName(string $displayName): self
     {
         $this->displayName = $displayName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MediaReview[]
+     */
+    public function getMediaReviews(): Collection
+    {
+        return $this->mediaReviews;
+    }
+
+    public function addMediaReview(MediaReview $mediaReview): self
+    {
+        if (!$this->mediaReviews->contains($mediaReview)) {
+            $this->mediaReviews[] = $mediaReview;
+            $mediaReview->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMediaReview(MediaReview $mediaReview): self
+    {
+        if ($this->mediaReviews->contains($mediaReview)) {
+            $this->mediaReviews->removeElement($mediaReview);
+            // set the owning side to null (unless already changed)
+            if ($mediaReview->getUser() === $this) {
+                $mediaReview->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MediaComment[]
+     */
+    public function getMediaComments(): Collection
+    {
+        return $this->mediaComments;
+    }
+
+    public function addMediaComment(MediaComment $mediaComment): self
+    {
+        if (!$this->mediaComments->contains($mediaComment)) {
+            $this->mediaComments[] = $mediaComment;
+            $mediaComment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMediaComment(MediaComment $mediaComment): self
+    {
+        if ($this->mediaComments->contains($mediaComment)) {
+            $this->mediaComments->removeElement($mediaComment);
+            // set the owning side to null (unless already changed)
+            if ($mediaComment->getUser() === $this) {
+                $mediaComment->setUser(null);
+            }
+        }
 
         return $this;
     }
