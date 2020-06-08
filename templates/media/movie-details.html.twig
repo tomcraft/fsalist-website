@@ -1,3 +1,4 @@
+{% set title = movie.title %}
 {% extends 'base.html.twig' %}
 {% block content %}
     <section class="section section--details section--bg" data-bg="{{ asset('img/section/details.jpg') }}">
@@ -214,10 +215,12 @@
                                             </li>
                                         </ul>
 
+                                        {% if app.user %}
                                         <form action="#" class="form">
                                             <textarea id="text" name="text" class="form__textarea" placeholder="Add comment"></textarea>
                                             <button type="button" class="form__btn">{{ 'global.send'|trans }}</button>
                                         </form>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <!-- end comments -->
@@ -242,6 +245,7 @@
                                             </li>
                                         </ul>
 
+                                        {% if app.user %}
                                         <form action="#" class="form">
                                             <input type="text" class="form__input" placeholder="{{ 'details.review-title'|trans }}">
                                             <textarea class="form__textarea" placeholder="{{ 'details.review-text'|trans }}"></textarea>
@@ -251,6 +255,7 @@
                                             </div>
                                             <button type="button" class="form__btn">{{ 'global.send'|trans }}</button>
                                         </form>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <!-- end reviews -->
