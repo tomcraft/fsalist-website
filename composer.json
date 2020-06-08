@@ -29,11 +29,12 @@
         "symfony/twig-pack": "*",
         "symfony/validator": "5.0.*",
         "symfony/web-link": "5.0.*",
-        "symfony/yaml": "5.0.*"
+        "symfony/yaml": "5.0.*",
+        "symfonycasts/reset-password-bundle": "^1.1"
     },
     "require-dev": {
         "symfony/debug-pack": "*",
-        "symfony/maker-bundle": "^1.0",
+        "symfony/maker-bundle": "^1.18",
         "symfony/profiler-pack": "*",
         "symfony/test-pack": "*"
     },

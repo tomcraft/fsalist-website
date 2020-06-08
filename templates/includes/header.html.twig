@@ -58,7 +58,7 @@
                     <!-- header auth -->
                     <div class="header__auth">
                         <form action="#" class="header__search">
-                            <input class="header__search-input" type="text" placeholder="Search...">
+                            <input class="header__search-input" type="text" placeholder="{{ 'global.search'|trans }}">
                             <button class="header__search-button" type="button">
                                 <i class="icon ion-ios-search"></i>
                             </button>
@@ -83,10 +83,15 @@
                         </div>
                         <!-- end dropdown -->
 
-                        <a href="{{ path('sign-in') }}" class="header__sign-in">
-                            <i class="icon ion-ios-log-in"></i>
-                            <span>{{ 'auth.sign-in'|trans }}</span>
-                        </a>
+                        {% if app.user %}
+                            <a href="{{ path('profile') }}"><img class= "header__avatar" src="{{ gravatar(app.user.email, 80, 'https://fsalist.com/img/user.png') }}" alt="profile picture"></a>
+                        {% else %}
+                            <a href="{{ path('login') }}" class="header__sign-in">
+                                <i class="icon ion-ios-log-in"></i>
+                                <span>{{ 'auth.login'|trans }}</span>
+                            </a>
+                        {% endif %}
+
                     </div>
                     <!-- end header auth -->
 

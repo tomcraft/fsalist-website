@@ -1,0 +1,32 @@
+{% set title = 'auth.title.login'|trans %}
+
+{% extends 'auth/base.html.twig' %}
+
+{% block content %}
+    <form method="post" class="sign__form">
+        {% include 'auth/logo.html.twig' %}
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        <div class="sign__group">
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control sign__input" required autofocus placeholder="{{ 'auth.email'|trans }}">
+        </div>
+
+        <div class="sign__group">
+            <input type="password" name="password" id="inputPassword" class="form-control sign__input" required placeholder="{{ 'auth.password'|trans }}">
+        </div>
+
+        <div class="sign__group sign__group--checkbox">
+            <input id="remember" name="_remember_me" type="checkbox" checked="checked">
+            <label for="remember">{{ 'auth.remember-me'|trans }}</label>
+        </div>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        <button class="sign__btn" type="submit">{{ 'auth.login'|trans }}</button>
+
+        <span class="sign__text">{{ 'auth.not-registered-yet-notice'|trans({'signUrl': path('register')})|raw }}</span>
+        <span class="sign__text"><a href="{{ path('forgot_password_request') }}">{{ 'auth.reset-password'|trans }}</a></span>
+    </form>
+{% endblock content %}

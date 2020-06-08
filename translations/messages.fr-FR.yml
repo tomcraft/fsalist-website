@@ -1,8 +1,14 @@
 global:
+  about: A propos
+  contact: Nous contacter
   privacy-policy: Politique de confidentialité
+  search: Rechercher...
   back: Retour
   send: Envoyer
+  save: Enregister
+  change: Modifier
 homepage:
+  title: Accueil
   now-playing: <b>ACTUELLEMENT</b> EN SALLES
 error:
   404: La page que vous cherchez n'est pas disponible
@@ -14,14 +20,22 @@ contact:
   email: Adresse email
   subject: Sujet
   text-hint: Ecrivez votre message...
+  info:
+    title: Informations
+    details: 'It is a long fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using.'
 auth:
+  title:
+    login: Connexion
+    register: Inscription
+    forgot: Réinitialisation
   email: Adresse mail
   password: Mot de passe
   username: Surnom
   remember-me: Se souvenir de moi
-  forgot-password: Mot de passe oublié ?
-  sign-in: Se connecter
-  sign-up: S'inscrire
+  reset-password: Mot de passe oublié ?
+  login: Se connecter
+  logout: Se déconnecter
+  register: S'inscrire
   forgot: Réinitialiser
   forgot-notice: Nous vous enverrons un lien par email
   already-registered-notice: Déjà inscrit ? <a href="signUrl">Connectez-vous !</a>
@@ -42,3 +56,17 @@ details:
   review-text: Votre critique...
   review-rate: Note
   pictures: Photos
+profile:
+  title: Votre profil
+  tab-title: Profil
+  details:
+    title: Détails du profil
+    username: Surnom
+    email: Email
+    first-name: Prénom
+    last-name: Nom
+  change-password:
+    title: Changer mon mot de passe
+    old: Ancien mot de passe
+    new: Nouveau mot de passe
+    new-confirm: Confirmer le mot de passe

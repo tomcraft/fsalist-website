@@ -1,0 +1,36 @@
+{% set title = 'auth.title.register'|trans %}
+
+{% extends 'auth/base.html.twig' %}
+
+{% block content %}
+
+    {{ form_start(registrationForm, { 'attr': {'class': 'sign__form'} }) }}
+    {% include 'auth/logo.html.twig' %}
+        {{ form_errors(registrationForm, {'attr': {'class': 'your-class'}}) }}
+
+        <div class="sign__group">
+            {{ form_widget(registrationForm.displayName, { 'attr': {'class': 'sign__input', 'placeholder': 'auth.username' } }) }}
+            {{ form_errors(registrationForm.displayName) }}
+        </div>
+
+        <div class="sign__group">
+            {{ form_widget(registrationForm.email, { 'attr': {'class': 'sign__input', 'placeholder': 'auth.email' } }) }}
+            {{ form_errors(registrationForm.email) }}
+        </div>
+
+        <div class="sign__group">
+            {{ form_widget(registrationForm.plainPassword, { 'attr': {'class': 'sign__input', 'placeholder': 'auth.password' } }) }}
+            {{ form_errors(registrationForm.plainPassword) }}
+        </div>
+
+        <div class="sign__group sign__group--checkbox">
+            {{ form_widget(registrationForm.agreeTerms) }}
+            <label for="{{ registrationForm.agreeTerms.vars.id }}">{{ 'auth.privacy-policy-agreement'|trans({'policyUrl': path('privacy')})|raw }}</label>
+            {{ form_errors(registrationForm.agreeTerms) }}
+        </div>
+
+        <button class="sign__btn" type="submit">{{ 'auth.register'|trans }}</button>
+
+        <span class="sign__text">{{ 'auth.already-registered-notice'|trans({'signUrl': path('login')})|raw }}</span>
+    {{ form_end(registrationForm) }}
+{% endblock content %}

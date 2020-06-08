@@ -1,6 +1,9 @@
+{% set title = 'auth.title.forgot'|trans %}
+
 {% extends 'auth/base.html.twig' %}
 
 {% block content %}
+    {% include 'auth/logo.html.twig' %}
     <div class="sign__group">
         <input type="text" class="sign__input" placeholder="{{ 'auth.email'|trans }}">
     </div>

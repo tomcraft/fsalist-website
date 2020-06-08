@@ -1,8 +1,14 @@
 global:
+  about: Abous Us
+  contact: Contacts
   privacy-policy: Privacy Policy
+  search: Search...
   back: Go back
   send: Send
+  save: Save
+  change: Change
 homepage:
+  title: Home
   now-playing: <b>CURRENTLY</b> IN THEATERS
 error:
   404: The page you are looking for is not available!
@@ -14,14 +20,22 @@ contact:
   email: Email
   subject: Subject
   text-hint: Type your message...
+  info:
+    title: Info
+    details: 'It is a long fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using.'
 auth:
+  title:
+    login: Connexion
+    register: Inscription
+    forgot: Réinitialisation
   email: Email
   password: Password
   username: Username
   remember-me: Remember Me
-  forgot-password: Forgot password?
-  sign-in: Sign in
-  sign-up: Sign up
+  reset-password: Forgot password?
+  login: Login
+  logout: Logout
+  register: Register
   forgot: Reset password
   forgot-notice: We will send a password reset link to your Email
   already-registered-notice: Already have an account? <a href="signUrl">Sign in!</a>
@@ -42,3 +56,18 @@ details:
   review-text: Your review...
   review-rate: Rate
   pictures: Photos
+profile:
+  title: Your profile
+  tab-title: Profile
+  details:
+    title: Profile details
+    username: Username
+    email: Email
+    first-name: First Name
+    last-name: Last Name
+  change-password:
+    title: Change password
+    old: Old Password
+    new: New Password
+    new-comfirm: Confirm New Password
+

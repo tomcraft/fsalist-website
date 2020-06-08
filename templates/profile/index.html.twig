@@ -1,0 +1,148 @@
+{% set title = 'profile.title'|trans %}
+{% extends 'base.html.twig' %}
+{% block content %}
+    {% include 'includes/breadcrumb.html.twig' %}
+    <div class="content">
+        <!-- profile -->
+        <div class="profile">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="profile__content">
+                            <div class="profile__user">
+                                <div class="profile__avatar">
+                                    <img src="{{ gravatar(app.user.email, 80, 'https://fsalist.com/img/user.png') }}" alt="profile avatar">
+                                </div>
+                                <div class="profile__meta">
+                                    <h3>{{ app.user.displayName }}</h3>
+                                    <span>ID: {{ app.user.id }}</span>
+                                </div>
+                            </div>
+
+                            <!-- content tabs nav -->
+                            <ul class="nav nav-tabs content__tabs content__tabs--profile" id="content__tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">{{ 'profile.tab-title'|trans }}</a>
+                                </li>
+                            </ul>
+                            <!-- end content tabs nav -->
+
+                            <!-- content mobile tabs nav -->
+                            <div class="content__mobile-tabs content__mobile-tabs--profile" id="content__mobile-tabs">
+                                <div class="content__mobile-tabs-btn dropdown-toggle" role="navigation" id="mobile-tabs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <input type="button" value="Profile">
+                                    <span></span>
+                                </div>
+
+                                <div class="content__mobile-tabs-menu dropdown-menu" aria-labelledby="mobile-tabs">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item"><a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Profile</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- end content mobile tabs nav -->
+
+                            <a href="{{ path('logout') }}" class="profile__logout">
+                                <i class="icon ion-ios-log-out"></i>
+                                <span>{{ 'auth.logout'|trans }}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end profile -->
+
+        <div class="container">
+            <!-- content tabs -->
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
+                    <div class="row">
+                        <!-- details form -->
+                        <div class="col-12 col-lg-6">
+                            <form action="#" class="profile__form">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4 class="profile__title">{{ 'profile.details.title'|trans }}</h4>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                        <div class="profile__group">
+                                            <label class="profile__label" for="username">{{ 'profile.details.username'|trans }}</label>
+                                            <input id="username" type="text" name="username" class="profile__input" placeholder="johndoe98" value="{{ app.user.displayName }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                        <div class="profile__group">
+                                            <label class="profile__label" for="email">{{ 'profile.details.email'|trans }}</label>
+                                            <input id="email" type="text" name="email" class="profile__input" placeholder="john.doe@yahoo.com" value="{{ app.user.email }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                        <div class="profile__group">
+                                            <label class="profile__label" for="firstname">{{ 'profile.details.first-name'|trans }}</label>
+                                            <input id="firstname" type="text" name="firstname" class="profile__input" placeholder="John">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                        <div class="profile__group">
+                                            <label class="profile__label" for="lastname">{{ 'profile.details.last-name'|trans }}</label>
+                                            <input id="lastname" type="text" name="lastname" class="profile__input" placeholder="Doe">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button class="profile__btn" type="button">{{ 'global.save'|trans }}</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- end details form -->
+
+                        <!-- password form -->
+                        <div class="col-12 col-lg-6">
+                            <form action="#" class="profile__form">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4 class="profile__title">{{ 'profile.change-password.title'|trans }}</h4>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                        <div class="profile__group">
+                                            <label class="profile__label" for="oldpass">{{ 'profile.change-password.old'|trans }}</label>
+                                            <input id="oldpass" type="password" name="oldpass" class="profile__input">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                        <div class="profile__group">
+                                            <label class="profile__label" for="newpass">{{ 'profile.change-password.new'|trans }}</label>
+                                            <input id="newpass" type="password" name="newpass" class="profile__input">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                                        <div class="profile__group">
+                                            <label class="profile__label" for="confirmpass">{{ 'profile.change-password.new-confirm'|trans }}</label>
+                                            <input id="confirmpass" type="password" name="confirmpass" class="profile__input">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button class="profile__btn" type="button">{{ 'global.change'|trans }}</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- end password form -->
+                    </div>
+                </div>
+            </div>
+            <!-- end content tabs -->
+        </div>
+    </div>
+    <!-- end content -->
+{% endblock content %}
