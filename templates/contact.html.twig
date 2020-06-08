@@ -15,13 +15,13 @@
                         <!-- end section title -->
 
                         <div class="col-12">
-                            <form action="#" class="form form--contacts">
-                                <input type="text" class="form__input" placeholder="{{ 'contact.name'|trans }}">
-                                <input type="text" class="form__input" placeholder="{{ 'contact.email'|trans }}">
-                                <input type="text" class="form__input" placeholder="{{ 'contact.subject'|trans }}">
-                                <textarea id="text" name="text" class="form__textarea" placeholder="{{ 'contact.text-hint'|trans }}"></textarea>
-                                <button type="button" class="form__btn">{{ 'global.send'|trans }}</button>
-                            </form>
+                            {{ form_start(form, {'attr': {'id': 'contact-form', 'class': 'form form--contacts'}}) }}
+                                {{ form_widget(form.name, {'attr': {'class': 'form__input', 'placeholder': 'contact.name'}}) }}
+                                {{ form_widget(form.email, {'attr': {'class': 'form__input', 'placeholder': 'contact.email'}}) }}
+                                {{ form_widget(form.subject, {'attr': {'class': 'form__input', 'placeholder': 'contact.subject'}}) }}
+                                {{ form_widget(form.message, {'attr': {'class': 'form__textarea', 'placeholder': 'contact.text-hint'}}) }}
+                                <button type="submit" class="form__btn">{{ 'global.send'|trans }}</button>
+                            {{ form_end(form) }}
                         </div>
                     </div>
                 </div>

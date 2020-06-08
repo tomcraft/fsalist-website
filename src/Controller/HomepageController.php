@@ -32,14 +32,6 @@ class HomepageController extends AbstractController
     }
 
     /**
-     * @Route("/contact", name="contact")
-     */
-    public function contact()
-    {
-        return $this->render('contact.html.twig');
-    }
-
-    /**
      * @Route("/privacy", name="privacy")
      */
     public function privacy()
