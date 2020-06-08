@@ -23,7 +23,7 @@ class MediaComment
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="mediaComments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private $author;
 
     /**
      * @ORM\Column(type="integer")
@@ -65,14 +65,14 @@ class MediaComment
         return $this->id;
     }
 
-    public function getUser(): ?User
+    public function getAuthor(): ?User
     {
-        return $this->user;
+        return $this->author;
     }
 
-    public function setUser(?User $user): self
+    public function setAuthor(?User $author): self
     {
-        $this->user = $user;
+        $this->author = $author;
 
         return $this;
     }

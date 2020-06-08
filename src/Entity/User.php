@@ -44,12 +44,12 @@ class User implements UserInterface
     private $displayName;
 
     /**
-     * @ORM\OneToMany(targetEntity=MediaReview::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=MediaReview::class, mappedBy="author")
      */
     private $mediaReviews;
 
     /**
-     * @ORM\OneToMany(targetEntity=MediaComment::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=MediaComment::class, mappedBy="author")
      */
     private $mediaComments;
 
@@ -171,7 +171,7 @@ class User implements UserInterface
     {
         if (!$this->mediaReviews->contains($mediaReview)) {
             $this->mediaReviews[] = $mediaReview;
-            $mediaReview->setUser($this);
+            $mediaReview->setAuthor($this);
         }
 
         return $this;
@@ -182,8 +182,8 @@ class User implements UserInterface
         if ($this->mediaReviews->contains($mediaReview)) {
             $this->mediaReviews->removeElement($mediaReview);
             // set the owning side to null (unless already changed)
-            if ($mediaReview->getUser() === $this) {
-                $mediaReview->setUser(null);
+            if ($mediaReview->getAuthor() === $this) {
+                $mediaReview->setAuthor(null);
             }
         }
 
@@ -202,7 +202,7 @@ class User implements UserInterface
     {
         if (!$this->mediaComments->contains($mediaComment)) {
             $this->mediaComments[] = $mediaComment;
-            $mediaComment->setUser($this);
+            $mediaComment->setAuthor($this);
         }
 
         return $this;
@@ -213,8 +213,8 @@ class User implements UserInterface
         if ($this->mediaComments->contains($mediaComment)) {
             $this->mediaComments->removeElement($mediaComment);
             // set the owning side to null (unless already changed)
-            if ($mediaComment->getUser() === $this) {
-                $mediaComment->setUser(null);
+            if ($mediaComment->getAuthor() === $this) {
+                $mediaComment->setAuthor(null);
             }
         }
 

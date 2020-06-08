@@ -3347,7 +3347,10 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   border-radius: 50%;
 }
 .reviews__rating--green {
-  border-color: #48ee3b;
+    border-color: #48ee3b;
+}
+.reviews__rating--orange {
+    border-color: #fd9930;
 }
 .reviews__rating--red {
   border-color: #fd6060;

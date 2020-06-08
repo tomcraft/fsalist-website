@@ -4,6 +4,9 @@
 namespace App\Controller;
 
 
+use App\Entity\MediaComment;
+use App\Entity\MediaReview;
+use App\Repository\MediaReviewRepository;
 use App\Repository\Scrapper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,6 +33,8 @@ class MediaController extends AbstractController
         }
         $images = Scrapper::movieImages($movieId, $locale);
         $videos = Scrapper::movieVideos($movieId, $locale);
+        $commentRepository = $this->getDoctrine()->getRepository(MediaComment::class);
+        $reviewRepository = $this->getDoctrine()->getRepository(MediaReview::class);
         return $this->render('media/movie-details.html.twig', [
             'movie' => $details,
             'credits' => $credits,
@@ -37,6 +42,8 @@ class MediaController extends AbstractController
             'movieGenres' => $movieGenres,
             'images' => $images,
             'videos' => $videos->results,
+            'comments' => $commentRepository->findBy(['mediaId' => $movieId], ['created_at' => 'DESC']),
+            'reviews' => $reviewRepository->findBy(['mediaId' => $movieId], ['created_at' => 'DESC'])
         ]);
     }
 }

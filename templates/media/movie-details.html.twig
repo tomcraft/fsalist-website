@@ -233,6 +233,19 @@
                                 <div class="col-12">
                                     <div class="reviews">
                                         <ul class="reviews__list">
+                                            {% for review in reviews %}
+                                            <li class="reviews__item">
+                                                <div class="reviews__autor">
+                                                    <img class="reviews__avatar" src="{{ gravatar(review.author.email, 80, 'https://fsalist.com/img/user.png') }}" alt="">
+                                                    <span class="reviews__name">{{ review.title }}</span>
+                                                    <span class="reviews__time">{{ review.createdAt|date("d.m.Y, H:i") }} by {{ review.author.displayName }}</span>
+
+                                                    <span class="reviews__rating reviews__rating--{{ review.rate >= 7 ? 'green' : review.rate >= 5 ? 'orange' : 'red' }}">{{ review.rate }}</span>
+                                                </div>
+                                                <p class="reviews__text">{{ review.text }}</p>
+                                            </li>
+                                            {% endfor %}
+<!--
                                             <li class="reviews__item">
                                                 <div class="reviews__autor">
                                                     <img class="reviews__avatar" src="{{ asset('img/user.png') }}" alt="">
@@ -242,7 +255,7 @@
                                                     <span class="reviews__rating reviews__rating--green">8.4</span>
                                                 </div>
                                                 <p class="reviews__text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                                            </li>
+                                            </li> -->
                                         </ul>
 
                                         {% if app.user %}
