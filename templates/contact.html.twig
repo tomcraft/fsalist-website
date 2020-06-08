@@ -1,5 +1,7 @@
+{% set title = 'contact.title'|trans %}
 {% extends 'base.html.twig' %}
 {% block content %}
+    {% set empty_breadcrumb = '' %}
 {% include 'includes/breadcrumb.html.twig' %}
     <section class="section">
         <div class="container">
@@ -28,22 +30,21 @@
                     <div class="row">
                         <!-- section title -->
                         <div class="col-12">
-                            <h2 class="section__title">Info</h2>
+                            <h2 class="section__title">{{ 'contact.info.title'|trans }}</h2>
                         </div>
                         <!-- end section title -->
 
                         <div class="col-12">
-                            <p class="section__text">It is a long fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using.</p>
+                            <p class="section__text">{{ 'contact.info.details'|trans }}</p>
 
                             <ul class="contacts__list">
-                                <li><a href="tel:+18002345678">+1 (800) 234-5678</a></li>
+                                <li><a href="tel:++33135309832">+33 1 35 30 98 32</a></li>
                                 <li><a href="mailto:contact@fsalist.com">contact@fsalist.com</a></li>
                             </ul>
                             <ul class="contacts__social">
-                                <li class="facebook"><a href="#"><i class="icon ion-logo-facebook"></i></a></li>
-                                <li class="instagram"><a href="#"><i class="icon ion-logo-instagram"></i></a></li>
-                                <li class="twitter"><a href="#"><i class="icon ion-logo-twitter"></i></a></li>
-                                <li class="vk"><a href="#"><i class="icon ion-logo-vk"></i></a></li>
+                                <li class="facebook"><a href="https://facebook.com/FSAList"><i class="icon ion-logo-facebook"></i></a></li>
+                                <li class="instagram"><a href="https://instagram.com/FSAList"><i class="icon ion-logo-instagram"></i></a></li>
+                                <li class="twitter"><a href="https://twitter.com/FSAList"><i class="icon ion-logo-twitter"></i></a></li>
                             </ul>
                         </div>
                     </div>
