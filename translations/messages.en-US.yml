@@ -25,9 +25,9 @@ contact:
     details: 'It is a long fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using.'
 auth:
   title:
-    login: Connexion
-    register: Inscription
-    forgot: Réinitialisation
+    login: Login
+    register: Register
+    forgot: Reset password
   email: Email
   password: Password
   username: Username
@@ -41,6 +41,9 @@ auth:
   already-registered-notice: Already have an account? <a href="signUrl">Sign in!</a>
   not-registered-yet-notice: Don't have an account yet? <a href="signUrl">Sign up!</a>
   privacy-policy-agreement: I agree to the <a href="policyUrl">Privacy Policy</a>
+mails:
+  register:
+    subject: Validation of your registration
 details:
   director: Director
   casting: Cast

@@ -17,13 +17,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ProfileController extends AbstractController
 {
-    /** @var UserPasswordEncoderInterface $passwordEncoder */
-    private $passwordEncoder;
-
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
-    {
-        $this->passwordEncoder = $passwordEncoder;
-    }
 
     /**
      * @IsGranted("IS_AUTHENTICATED_FULLY")
@@ -31,7 +24,7 @@ class ProfileController extends AbstractController
      * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function index(Request $request)
+    public function index(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         /** @var $user User */
         $user = $this->getUser();
@@ -64,10 +57,10 @@ class ProfileController extends AbstractController
             $data = $passwordForm->getData();
             $user = $this->getUser();
 
-            if ($this->passwordEncoder->isPasswordValid($user, $data['password'])
+            if ($passwordEncoder->isPasswordValid($user, $data['password'])
                 && $data['newPassword'] == $data['confirmPassword']) {
                 // encode the plain password
-                $user->setPassword($this->passwordEncoder->encodePassword($user, $data['confirmPassword']));
+                $user->setPassword($passwordEncoder->encodePassword($user, $data['confirmPassword']));
 
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);

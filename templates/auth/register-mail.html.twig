@@ -1,0 +1,14 @@
+{% set title = 'auth.title.register'|trans %}
+
+{% extends 'auth/base.html.twig' %}
+
+{% block content %}
+
+    <div class = 'sign__form'>
+        {% include 'auth/logo.html.twig' %}
+        <span class="sign__text">Hey {{ username }} !</span>
+        <span class="sign__text">Your account has been successfully created !</span>
+        <span class="sign__text">You can now login to your account <a href="{{ app.request.schemeAndHttpHost ~ path('login') }}">here</a></span>
+    </div>
+
+{% endblock content %}

@@ -41,6 +41,9 @@ auth:
   already-registered-notice: Déjà inscrit ? <a href="signUrl">Connectez-vous !</a>
   not-registered-yet-notice: Pas encore inscrit ? <a href="signUrl">Créez un compte !</a>
   privacy-policy-agreement: J'accepte la <a href="policyUrl">politique de confidentialité</a>
+mails:
+  register:
+    subject: Validation de votre inscription
 details:
   director: Réalisateur
   casting: Casting
