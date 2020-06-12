@@ -1,4 +1,4 @@
-{% set title = movie.title %}
+{% set title = show.name %}
 {% extends 'base.html.twig' %}
 {% block content %}
     <section class="section section--details section--bg" data-bg="{{ asset('img/section/details.jpg') }}">
@@ -7,7 +7,7 @@
             <div class="row">
                 <!-- title -->
                 <div class="col-12">
-                    <h1 class="section__title">{{ movie.title }}</h1>
+                    <h1 class="section__title">{{ show.name }}</h1>
                 </div>
                 <!-- end title -->
 
@@ -18,9 +18,9 @@
                             <!-- card cover -->
                             <div class="col-12 col-sm-5 col-lg-6 col-xl-5">
                                 <div class="card__cover">
-                                    <img src="{{ movie.poster_path != null ? movie.poster_path|mediaURL('w342') : asset('img/covers/unknown.jpg') }}" alt="">
-                                    {% if movie.vote_count > 0 %}
-                                    <span class="card__rate card__rate--{{ movie.vote_average >= 7 ? 'green' : movie.vote_average >= 5 ? 'orange' : 'red' }}">{{ movie.vote_average }}</span>
+                                    <img src="{{ show.poster_path != null ? show.poster_path|mediaURL('w342') : asset('img/covers/unknown.jpg') }}" alt="">
+                                    {% if show.vote_count > 0 %}
+                                    <span class="card__rate card__rate--{{ show.vote_average >= 7 ? 'green' : show.vote_average >= 5 ? 'orange' : 'red' }}">{{ show.vote_average }}</span>
                                     {% endif %}
                                 </div>
                             </div>
@@ -29,16 +29,26 @@
                             <!-- card content -->
                             <div class="col-12 col-sm-7 col-lg-6 col-xl-7">
                                 <div class="card__content">
-                                    <ul class="card__meta">
-                                        <li><span>{{ 'details.director'|trans }}:</span> <a href="#">{{ credits.crew[0].name }}</a></li>
-                                        <li><span>{{ 'details.genre'|trans }}:</span> {% for genre in movie.genres %} <a href="#">{{ genre.name }}</a> {% endfor %}
-                                        <li><span>{{ 'details.release-year'|trans }}:</span> {{ movie.release_date|date("Y") }}</li>
-                                        <li><span>{{ 'details.running-time'|trans }}:</span> {{ movie.runtime }} min</li>
-                                        <li><span>{{ 'details.origin-country'|trans }}:</span> {% for country in movie.production_countries %} <a href="#">{{ country.name|length > 16 ? country.iso_3166_1 : country.name }}</a> {% endfor %}</li>
-                                    </ul>
-                                    <div class="card__description">
-                                        {{ movie.overview }}
+                                    <div style="display: flex;justify-content: space-between">
+                                        <ul class="card__meta">
+                                            {% if show.created_by %}
+                                                <li><span>{{ 'details.created-by'|trans }}:</span> <a href="#">{{ show.created_by[0].name }}</a></li>
+                                            {% endif %}
+                                            <li><span>{{ 'details.genre'|trans }}:</span> {% for genre in show.genres %} <a href="#">{{ genre.name }}</a>{% endfor %}
+                                            <li><span>{{ 'details.release-year'|trans }}:</span> {{ show.first_air_date|date("Y") }}</li>
+                                            <li><span>{{ 'details.running-time'|trans }}:</span> {{ show.episode_run_time[0] }} min</li>
+                                            <li><span>{{ 'details.status'|trans }}:</span> {{ show.status }}</li>
+                                            <li><span>{{ 'details.origin-country'|trans }}:</span> {% for country in show.origin_country %} <a href="#">{{ country}}</a> {% endfor %}</li>
+                                        </ul>
+                                        {% if show.networks %}
+                                        <div class="card__networks">
+                                            {% for network in show.networks|slice(0, 3) %}
+                                                <img src="{{ network.logo_path|mediaURL('w92') }}" alt="">
+                                            {% endfor %}
+                                        </div>
+                                        {% endif %}
                                     </div>
+                                    <div class="card__description">{{ show.overview }}</div>
                                 </div>
                             </div>
                             <!-- end card content -->
@@ -304,23 +314,23 @@
                         <!-- end section title -->
 
                         <!-- card -->
-                        {% for movie in recommendations|slice(0, 8) %}
+                        {% for show in recommendations|slice(0, 8) %}
                         <div class="col-6 col-sm-4 col-lg-6">
                             <div class="card">
                                 <div class="card__cover">
-                                    <img src="{{ movie.poster_path != null ? movie.poster_path|mediaURL('w342') : asset('img/covers/unknown.jpg') }}" alt="{{ movie.title }}">
+                                    <img src="{{ show.poster_path != null ? show.poster_path|mediaURL('w342') : asset('img/covers/unknown.jpg') }}" alt="{{ show.name }}">
                                     <a href="#" class="card__play">
                                         <i class="icon ion-ios-play"></i>
                                     </a>
-                                    {% if movie.vote_count > 0 %}
-                                        <span class="card__rate card__rate--{{ movie.vote_average >= 7 ? 'green' : movie.vote_average >= 5 ? 'orange' : 'red' }}">{{ movie.vote_average }}</span>
+                                    {% if show.vote_count > 0 %}
+                                        <span class="card__rate card__rate--{{ show.vote_average >= 7 ? 'green' : show.vote_average >= 5 ? 'orange' : 'red' }}">{{ show.vote_average }}</span>
                                     {% endif %}
                                 </div>
                                 <div class="card__content">
-                                    <h3 class="card__title"><a href="{{ path('movie-details', {movieId: movie.id}) }}">{{ movie.title }}</a></h3>
+                                    <h3 class="card__title"><a href="{{ path('tv-show-details', {tvShowId: show.id}) }}">{{ show.name }}</a></h3>
                                     <span class="card__category">
-                                    {% for genreId in movie.genre_ids %}
-                                        <a href="#">{{ movieGenres[genreId] }}</a>
+                                    {% for genreId in show.genre_ids %}
+                                        <a href="#">{{ showGenres[genreId]|default('?') }}</a>
                                     {% endfor %}
 								    </span>
                                 </div>

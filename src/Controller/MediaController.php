@@ -17,6 +17,29 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MediaController extends AbstractController
 {
+
+    private function handleReviewForm(Request $request, string $mediaType, int $mediaId) {
+        $media = new MediaReview();
+        $reviewForm = $this->createFormBuilder($media)
+                ->add('title')
+                ->add('text', TextareaType::class)
+                ->add('rate', HiddenType::class)
+                ->getForm();
+        $reviewForm->handleRequest($request);
+
+        if ($reviewForm->isSubmitted() && $reviewForm->isValid()) {
+            $media->setCreatedAt(new \DateTime());
+            $media->setAuthor($this->getUser());
+            $media->setMediaId($mediaId);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($media);
+            $entityManager->flush();
+            return null;
+        }
+        return $reviewForm;
+    }
+
     /**
      * @Route("/movie/{movieId}", name="movie-details")
      * @param Request $request
@@ -25,12 +48,10 @@ class MediaController extends AbstractController
      */
     public function movieDetails(Request $request, int $movieId)
     {
-        $media = new MediaReview();
-        $reviewForm = $this->createFormBuilder($media)
-            ->add('title')
-            ->add('text', TextareaType::class)
-            ->add('rate', HiddenType::class)
-            ->getForm();
+        $reviewForm = $this->handleReviewForm($request, 'movie', $movieId);
+        if ($reviewForm == null) {
+            return $this->redirect($request->getUri());
+        }
 
         $locale = $request->getLocale();
         $movieGenres = Scrapper::movieGenres($locale);
@@ -45,30 +66,53 @@ class MediaController extends AbstractController
         $commentRepository = $this->getDoctrine()->getRepository(MediaComment::class);
         $reviewRepository = $this->getDoctrine()->getRepository(MediaReview::class);
 
-        $reviewForm->handleRequest($request);
+        return $this->render('media/movie-details.html.twig', [
+                'movie' => $details,
+                'credits' => $credits,
+                'recommendations' => $recommendations->results,
+                'movieGenres' => $movieGenres,
+                'images' => $images,
+                'videos' => $videos->results,
+                'comments' => $commentRepository->findBy(['mediaId' => $movieId], ['created_at' => 'DESC']),
+                'reviews' => $reviewRepository->findBy(['mediaId' => $movieId], ['created_at' => 'DESC']),
+                'reviewForm' => $reviewForm->createView()
+        ]);
+    }
 
-        if ($reviewForm->isSubmitted() && $reviewForm->isValid()) {
-            $media->setCreatedAt(new \DateTime());
-            $media->setAuthor($this->getUser());
-            $media->setMediaId($movieId);
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($media);
-            $entityManager->flush();
-
+    /**
+     * @Route("/tv/{tvShowId}", name="tv-show-details")
+     * @param Request $request
+     * @param int $tvShowId
+     * @return Response
+     */
+    public function tvShowDetails(Request $request, int $tvShowId)
+    {
+        $reviewForm = $this->handleReviewForm($request, 'tv', $tvShowId);
+        if ($reviewForm == null) {
             return $this->redirect($request->getUri());
         }
 
-        return $this->render('media/movie-details.html.twig', [
-            'movie' => $details,
-            'credits' => $credits,
-            'recommendations' => $recommendations->results,
-            'movieGenres' => $movieGenres,
-            'images' => $images,
-            'videos' => $videos->results,
-            'comments' => $commentRepository->findBy(['mediaId' => $movieId], ['created_at' => 'DESC']),
-            'reviews' => $reviewRepository->findBy(['mediaId' => $movieId], ['created_at' => 'DESC']),
-            'reviewForm' => $reviewForm->createView()
+        $locale = $request->getLocale();
+        $movieGenres = Scrapper::tvShowGenres($locale);
+        $details = Scrapper::tvShowDetails($tvShowId, $locale);
+        $recommendations = Scrapper::tvShowRecommendations($tvShowId, $locale);
+        if($recommendations->total_results == 0) {
+            $recommendations = Scrapper::tvShowSimilar($tvShowId, $locale);
+        }
+        $images = Scrapper::tvShowImages($tvShowId, $locale);
+        $videos = Scrapper::tvShowVideos($tvShowId, $locale);
+        $commentRepository = $this->getDoctrine()->getRepository(MediaComment::class);
+        $reviewRepository = $this->getDoctrine()->getRepository(MediaReview::class);
+
+        return $this->render('media/tvshow-details.html.twig', [
+                'show' => $details,
+                'recommendations' => $recommendations->results,
+                'showGenres' => $movieGenres,
+                'images' => $images,
+                'videos' => $videos->results,
+                'comments' => $commentRepository->findBy(['mediaId' => $tvShowId], ['created_at' => 'DESC']),
+                'reviews' => $reviewRepository->findBy(['mediaId' => $tvShowId], ['created_at' => 'DESC']),
+                'reviewForm' => $reviewForm->createView()
         ]);
     }
 }

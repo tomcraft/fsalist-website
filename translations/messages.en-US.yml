@@ -46,7 +46,7 @@ mails:
     subject: Validation of your registration
 details:
   director: Director
-  casting: Cast
+  created-by: Creator
   genre: Genre
   release-year: Release year
   running-time: Running time
@@ -59,6 +59,7 @@ details:
   review-text: Your review...
   review-rate: Rate
   pictures: Photos
+  status: Status
 profile:
   title: Your profile
   tab-title: Profile

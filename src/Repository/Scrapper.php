@@ -44,22 +44,21 @@ class Scrapper
         return strtoupper($lang);
     }
 
-    public static function movieGenres(string $lang = 'fr-FR') {
+    public static function mediaGenres(string $mediaType, string $lang = 'fr-FR') {
         $data = array();
-        $genres = self::cache("genre/movie/list?language=$lang")->genres;
+        $genres = self::cache("genre/$mediaType/list?language=$lang")->genres;
         foreach ($genres as $genre) {
             $data[$genre->id] = $genre->name;
         }
         return $data;
     }
 
+    public static function movieGenres(string $lang = 'fr-FR') {
+        return self::mediaGenres('movie', $lang);
+    }
+
     public static function tvShowGenres(string $lang = 'fr-FR') {
-        $data = array();
-        $genres = json_decode(self::cache("genre/tv/list?language=$lang"))->genres;
-        foreach ($genres as $genre) {
-            $data[$genre->id] = $genre->name;
-        }
-        return $data;
+        return self::mediaGenres('tv', $lang);
     }
 
     public static function searchAny(string $query, int $page = 1, string $lang = 'fr-FR') {
@@ -116,6 +115,42 @@ class Scrapper
     public static function upcomingMovies(string $lang = 'fr-FR', int $page = 1, string $region = null) {
         if($region == null) $region = self::regionFromLang($lang);
         return self::cache("movie/upcoming?language=$lang&region=$region&page=$page");
+    }
+
+    public static function tvShowDetails(int $tvShowId, string $lang = 'fr-FR') {
+        return self::cache("tv/$tvShowId?language=$lang");
+    }
+
+    public static function tvShowImages(int $tvShowId, string $lang = 'fr-FR') {
+        return self::cache("tv/$tvShowId/images?language=$lang&include_image_language=en,null");
+    }
+
+    public static function tvShowVideos(int $tvShowId, string $lang = 'fr-FR') {
+        return self::cache("tv/$tvShowId/videos?language=$lang");
+    }
+
+    public static function tvShowCredits(int $tvShowId) {
+        return self::cache("tv/$tvShowId/credits");
+    }
+
+    public static function onTheAirTvShow(string $lang = 'fr-FR', int $page = 1) {
+        return self::cache("tv/on_the_air?language=$lang&page=$page");
+    }
+
+    public static function popularTvShow(string $lang = 'fr-FR', int $page = 1) {
+        return self::cache("tv/popular?language=$lang&page=$page");
+    }
+
+    public static function topRatedTvShow(string $lang = 'fr-FR', int $page = 1) {
+        return self::cache("tv/top_rated?language=$lang&page=$page");
+    }
+
+    public static function tvShowRecommendations(int $tvShowId, string $lang = 'fr-FR', int $page = 1) {
+        return self::cache("tv/$tvShowId/recommendations?language=$lang&page=$page");
+    }
+
+    public static function tvShowSimilar(int $tvShowId, string $lang = 'fr-FR', int $page = 1) {
+        return self::cache("tv/$tvShowId/similar?language=$lang&page=$page");
     }
 
 }
