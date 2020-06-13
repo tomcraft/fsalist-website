@@ -18,6 +18,11 @@ class WatchlistMedia
     private $watchlist;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $mediaType;
+
+    /**
      * @ORM\Id()
      * @ORM\Column(type="integer")
      */
@@ -41,6 +46,18 @@ class WatchlistMedia
     public function setWatchlist(?Watchlist $watchlist): self
     {
         $this->watchlist = $watchlist;
+
+        return $this;
+    }
+
+    public function getMediaType(): ?string
+    {
+        return $this->mediaType;
+    }
+
+    public function setMediaType(string $mediaType): self
+    {
+        $this->mediaType = $mediaType;
 
         return $this;
     }

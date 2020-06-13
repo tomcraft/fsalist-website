@@ -26,6 +26,11 @@ class MediaComment
     private $author;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $mediaType;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $mediaId;
@@ -78,6 +83,18 @@ class MediaComment
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getMediaType(): ?string
+    {
+        return $this->mediaType;
+    }
+
+    public function setMediaType(string $mediaType): self
+    {
+        $this->mediaType = $mediaType;
 
         return $this;
     }

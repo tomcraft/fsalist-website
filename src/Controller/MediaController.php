@@ -30,6 +30,7 @@ class MediaController extends AbstractController
         if ($reviewForm->isSubmitted() && $reviewForm->isValid()) {
             $media->setCreatedAt(new \DateTime());
             $media->setAuthor($this->getUser());
+            $media->setMediaType($mediaType);
             $media->setMediaId($mediaId);
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -73,8 +74,8 @@ class MediaController extends AbstractController
                 'movieGenres' => $movieGenres,
                 'images' => $images,
                 'videos' => $videos->results,
-                'comments' => $commentRepository->findBy(['mediaId' => $movieId], ['created_at' => 'DESC']),
-                'reviews' => $reviewRepository->findBy(['mediaId' => $movieId], ['created_at' => 'DESC']),
+                'comments' => $commentRepository->findBy(['mediaType' => 'movie', 'mediaId' => $movieId], ['created_at' => 'DESC']),
+                'reviews' => $reviewRepository->findBy(['mediaType' => 'movie', 'mediaId' => $movieId], ['created_at' => 'DESC']),
                 'reviewForm' => $reviewForm->createView()
         ]);
     }
@@ -93,7 +94,7 @@ class MediaController extends AbstractController
         }
 
         $locale = $request->getLocale();
-        $movieGenres = Scrapper::tvShowGenres($locale);
+        $showGenres = Scrapper::tvShowGenres($locale);
         $details = Scrapper::tvShowDetails($tvShowId, $locale);
         $recommendations = Scrapper::tvShowRecommendations($tvShowId, $locale);
         if($recommendations->total_results == 0) {
@@ -107,11 +108,11 @@ class MediaController extends AbstractController
         return $this->render('media/tvshow-details.html.twig', [
                 'show' => $details,
                 'recommendations' => $recommendations->results,
-                'showGenres' => $movieGenres,
+                'showGenres' => $showGenres,
                 'images' => $images,
                 'videos' => $videos->results,
-                'comments' => $commentRepository->findBy(['mediaId' => $tvShowId], ['created_at' => 'DESC']),
-                'reviews' => $reviewRepository->findBy(['mediaId' => $tvShowId], ['created_at' => 'DESC']),
+                'comments' => $commentRepository->findBy(['mediaType' => 'tv', 'mediaId' => $tvShowId], ['created_at' => 'DESC']),
+                'reviews' => $reviewRepository->findBy(['mediaType' => 'tv', 'mediaId' => $tvShowId], ['created_at' => 'DESC']),
                 'reviewForm' => $reviewForm->createView()
         ]);
     }
