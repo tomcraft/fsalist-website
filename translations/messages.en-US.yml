@@ -7,9 +7,6 @@ global:
   save: Save
   change: Change
 navbar:
-  home: Home
-  discover: Discover
-  watchlist: My Watchlist
   search: Search...
 homepage:
   title: Home
@@ -51,6 +48,8 @@ mails:
     subject: Validation of your registration
 discover:
   title: Discover
+watchlist:
+  title: My Watchlist
 details:
   director: Director
   created-by: Creator
@@ -67,6 +66,8 @@ details:
   review-rate: Rate
   pictures: Photos
   status: Status
+  number-of-seasons: Seasons
+  number-of-episodes: Episodes
 profile:
   title: Your profile
   tab-title: Profile

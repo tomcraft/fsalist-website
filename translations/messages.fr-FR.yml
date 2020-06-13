@@ -7,9 +7,6 @@ global:
   save: Enregister
   change: Modifier
 navbar:
-  home: Acceuil
-  discover: Découvrir
-  watchlist: Ma Watchlist
   search: Rechercher...
 homepage:
   title: Accueil
@@ -51,6 +48,8 @@ mails:
     subject: Validation de votre inscription
 discover:
   title: Découvrir
+watchlist:
+  title: Ma Watchlist
 details:
   director: Réalisateur
   created-by: Créateur
@@ -67,6 +66,8 @@ details:
   review-rate: Note
   pictures: Photos
   status: Statut
+  number-of-seasons: Saisons
+  number-of-episodes: Episodes
 profile:
   title: Votre profil
   tab-title: Profil
