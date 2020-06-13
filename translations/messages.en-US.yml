@@ -2,14 +2,19 @@ global:
   about: Abous Us
   contact: Contacts
   privacy-policy: Privacy Policy
-  search: Search...
   back: Go back
   send: Send
   save: Save
   change: Change
+navbar:
+  home: Home
+  discover: Discover
+  watchlist: My Watchlist
+  search: Search...
 homepage:
   title: Home
   now-playing: <b>CURRENTLY</b> IN THEATERS
+  whats-new: What's new ?
 error:
   404: The page you are looking for is not available!
   403: You can't access this page
@@ -44,6 +49,8 @@ auth:
 mails:
   register:
     subject: Validation of your registration
+discover:
+  title: Discover
 details:
   director: Director
   created-by: Creator

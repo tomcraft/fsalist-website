@@ -10,9 +10,8 @@
 
                     <!-- breadcrumb -->
                     <ul class="breadcrumb">
-                        <li class="breadcrumb__item"><a href="#">Item 1</a></li>
-                        <li class="breadcrumb__item"><a href="#">Item 2</a></li>
-                        <li class="breadcrumb__item breadcrumb__item--active">Item 3</li>
+                        <li class="breadcrumb__item"><a href="{{ path('homepage') }}">{{ 'navbar.home'|trans }}</a></li>
+                        <li class="breadcrumb__item breadcrumb__item--active">{{ title|default('Undefined') }}</li>
                     </ul>
                     <!-- end breadcrumb -->
                     {% endif %}

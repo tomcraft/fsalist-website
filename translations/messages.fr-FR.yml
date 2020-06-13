@@ -2,14 +2,19 @@ global:
   about: A propos
   contact: Nous contacter
   privacy-policy: Politique de confidentialité
-  search: Rechercher...
   back: Retour
   send: Envoyer
   save: Enregister
   change: Modifier
+navbar:
+  home: Acceuil
+  discover: Découvrir
+  watchlist: Ma Watchlist
+  search: Rechercher...
 homepage:
   title: Accueil
   now-playing: <b>ACTUELLEMENT</b> EN SALLES
+  whats-new: Quoi de neuf ?
 error:
   404: La page que vous cherchez n'est pas disponible
   403: L'accès à cette page a été bloqué
@@ -44,6 +49,8 @@ auth:
 mails:
   register:
     subject: Validation de votre inscription
+discover:
+  title: Découvrir
 details:
   director: Réalisateur
   created-by: Créateur
