@@ -34,7 +34,7 @@
                                             {% if show.created_by %}
                                                 <li><span>{{ 'details.created-by'|trans }}:</span> <a href="#">{{ show.created_by[0].name }}</a></li>
                                             {% endif %}
-                                            <li><span>{{ 'details.genre'|trans }}:</span> {% for genre in show.genres %} <a href="#">{{ genre.name }}</a>{% endfor %}
+                                            <li><span>{{ 'details.genre'|trans }}:</span> {% for genre in show.genres %} <a href="{{ path('discover', {'genre': genre.id}) }}">{{ genre.name }}</a>{% endfor %}
                                             <li><span>{{ 'details.release-year'|trans }}:</span> {{ show.first_air_date|date("Y") }}</li>
                                             <li><span>{{ 'details.running-time'|trans }}:</span> {{ show.episode_run_time[0] }} min</li>
                                             <li><span>{{ 'details.status'|trans }}:</span> {{ show.status }}</li>
@@ -333,7 +333,7 @@
                                     <h3 class="card__title"><a href="{{ media_url }}">{{ show.name }}</a></h3>
                                     <span class="card__category">
                                     {% for genreId in show.genre_ids %}
-                                        <a href="#">{{ showGenres[genreId]|default('?') }}</a>
+                                        <a href="{{ path('discover', {'genre': genreId}) }}">{{ genres[genreId]|default('?') }}</a>
                                     {% endfor %}
 								    </span>
                                 </div>

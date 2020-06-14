@@ -23,15 +23,13 @@ class HomepageController extends AbstractController
         $nowPlayingMovies = Scrapper::nowPlayingMovies($locale);
         $upcomingMovies = Scrapper::upcomingMovies($locale);
         $onAirTvShows = Scrapper::onTheAirTvShow($locale);
-        $movieGenres = Scrapper::movieGenres($locale);
-        $showGenres = Scrapper::tvShowGenres($locale);
+        $genres = Scrapper::mediaGenres($locale);
 
         return $this->render('homepage.html.twig', [
                 'nowPlayingMovies' => $nowPlayingMovies->results,
                 'upcomingMovies' => $upcomingMovies->results,
                 'onAirTvShows' => $onAirTvShows->results,
-                'movieGenres' => $movieGenres,
-                'showGenres' => $showGenres,
+                'genres' => $genres
         ]);
     }
 

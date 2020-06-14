@@ -173,9 +173,11 @@ $(document).ready(function () {
 
 	$('.filter__item-menu li').on('click', function() {
 		var text = $(this).text();
+		var dataId = $(this).attr('data-id');
 		var item = $(this);
 		var id = item.closest('.filter__item').attr('id');
 		$('#'+id).find('.filter__item-btn input').val(text);
+		$('#'+id).find('.filter__item-btn input[type=hidden]').val(dataId);
 	});
 
 	/*==============================
@@ -420,17 +422,18 @@ $(document).ready(function () {
 	Range sliders
 	==============================*/
 	/*1*/
+    const urlParams = new URLSearchParams(window.location.search);
 	function initializeFirstSlider() {
 		if ($('#filter__years').length) {
 			var firstSlider = document.getElementById('filter__years');
 			noUiSlider.create(firstSlider, {
 				range: {
-					'min': 2000,
-					'max': 2019
+					'min': 1950,
+					'max': new Date().getFullYear()
 				},
 				step: 1,
 				connect: true,
-				start: [2006, 2016],
+				start: [urlParams.get('year-min') || 1980, urlParams.get('year-max') || new Date().getFullYear()],
 				format: wNumb({
 					decimals: 0,
 				})
@@ -439,8 +442,13 @@ $(document).ready(function () {
 				document.getElementById('filter__years-start'),
 				document.getElementById('filter__years-end')
 			];
+			const firstSliderInput = [
+				document.getElementById('form-filter-year-min'),
+				document.getElementById('form-filter-year-max'),
+			];
 			firstSlider.noUiSlider.on('update', function( values, handle ) {
 				firstValues[handle].innerHTML = values[handle];
+				firstSliderInput[handle].value = values[handle];
 			});
 		} else {
 			return false;
@@ -460,7 +468,7 @@ $(document).ready(function () {
 				},
 				step: 0.1,
 				connect: true,
-				start: [2.5, 8.6],
+				start: [urlParams.get('rate-min') || 2.5, urlParams.get('rate-max') || 10],
 				format: wNumb({
 					decimals: 1,
 				})
@@ -470,9 +478,13 @@ $(document).ready(function () {
 				document.getElementById('filter__imbd-start'),
 				document.getElementById('filter__imbd-end')
 			];
-
+			const secondSliderInput = [
+				document.getElementById('form-filter-rate-min'),
+				document.getElementById('form-filter-rate-max'),
+			];
 			secondSlider.noUiSlider.on('update', function( values, handle ) {
 				secondValues[handle].innerHTML = values[handle];
+				secondSliderInput[handle].value = values[handle];
 			});
 
 			$('.filter__item-menu--range').on('click.bs.dropdown', function (e) {

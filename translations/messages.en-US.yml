@@ -48,6 +48,8 @@ mails:
     subject: Validation of your registration
 discover:
   title: Discover
+search:
+  title: Search
 watchlist:
   title: My Watchlist
 details:

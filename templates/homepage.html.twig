@@ -45,7 +45,7 @@
                                 <h3 class="card__title"><a href="{{ media_url }}">{{ movie.title }}</a></h3>
                                 <span class="card__category">
                                     {% for genreId in movie.genre_ids %}
-									<a href="#">{{ movieGenres[genreId] }}</a>
+									<a href="{{ path('discover', {'genre': genreId}) }}">{{ genres[genreId] }}</a>
                                     {% endfor %}
 								</span>
                             </div>
@@ -137,7 +137,7 @@
                                     <h3 class="card__title"><a href="{{ media_url }}">{{ movie.title }}</a></h3>
                                     <span class="card__category">
 										{% for genreId in movie.genre_ids %}
-                                            <a href="#">{{ movieGenres[genreId] }}</a>
+                                            <a href="{{ path('discover', {'genre': genreId}) }}">{{ genres[genreId] }}</a>
                                         {% endfor %}
 									</span>
                                 </div>
@@ -168,9 +168,9 @@
                                         <h3 class="card__title"><a href="{{ media_url }}">{{ show.name }}</a></h3>
                                         <span class="card__category">
 										{% for genreId in show.genre_ids %}
-                                            <a href="#">{{ showGenres[genreId]|default('?') }}</a>
+                                            <a href="{{ path('discover', {'genre': genreId}) }}">{{ genres[genreId]|default('?') }}</a>
                                         {% endfor %}
-									</span>
+									    </span>
                                     </div>
                                 </div>
                             </div>

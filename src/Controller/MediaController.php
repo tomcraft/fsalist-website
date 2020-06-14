@@ -55,7 +55,7 @@ class MediaController extends AbstractController
         }
 
         $locale = $request->getLocale();
-        $movieGenres = Scrapper::movieGenres($locale);
+        $genres = Scrapper::mediaGenres($locale);
         $details = Scrapper::movieDetails($movieId, $locale);
         $credits = Scrapper::movieCredits($movieId);
         $recommendations = Scrapper::movieRecommendations($movieId, $locale);
@@ -71,7 +71,7 @@ class MediaController extends AbstractController
                 'movie' => $details,
                 'credits' => $credits,
                 'recommendations' => $recommendations->results,
-                'movieGenres' => $movieGenres,
+                'genres' => $genres,
                 'images' => $images,
                 'videos' => $videos->results,
                 'comments' => $commentRepository->findBy(['mediaType' => 'movie', 'mediaId' => $movieId], ['created_at' => 'DESC']),
@@ -94,7 +94,7 @@ class MediaController extends AbstractController
         }
 
         $locale = $request->getLocale();
-        $showGenres = Scrapper::tvShowGenres($locale);
+        $genres = Scrapper::mediaGenres($locale);
         $details = Scrapper::tvShowDetails($tvShowId, $locale);
         $recommendations = Scrapper::tvShowRecommendations($tvShowId, $locale);
         if($recommendations->total_results == 0) {
@@ -108,7 +108,7 @@ class MediaController extends AbstractController
         return $this->render('media/tvshow-details.html.twig', [
                 'show' => $details,
                 'recommendations' => $recommendations->results,
-                'showGenres' => $showGenres,
+                'genres' => $genres,
                 'images' => $images,
                 'videos' => $videos->results,
                 'comments' => $commentRepository->findBy(['mediaType' => 'tv', 'mediaId' => $tvShowId], ['created_at' => 'DESC']),

@@ -31,7 +31,7 @@
                                 <div class="card__content">
                                     <ul class="card__meta">
                                         <li><span>{{ 'details.director'|trans }}:</span> <a href="#">{{ credits.crew[0].name }}</a></li>
-                                        <li><span>{{ 'details.genre'|trans }}:</span> {% for genre in movie.genres %} <a href="#">{{ genre.name }}</a> {% endfor %}
+                                        <li><span>{{ 'details.genre'|trans }}:</span> {% for genre in movie.genres %} <a href="{{ path('discover', {'genre': genre.id}) }}">{{ genre.name }}</a> {% endfor %}
                                         <li><span>{{ 'details.release-year'|trans }}:</span> {{ movie.release_date|date("Y") }}</li>
                                         <li><span>{{ 'details.running-time'|trans }}:</span> {{ movie.runtime }} min</li>
                                         <li><span>{{ 'details.origin-country'|trans }}:</span> {% for country in movie.production_countries %} <a href="#">{{ country.name|length > 16 ? country.iso_3166_1 : country.name }}</a> {% endfor %}</li>
@@ -321,7 +321,7 @@
                                     <h3 class="card__title"><a href="{{ media_url }}">{{ movie.title }}</a></h3>
                                     <span class="card__category">
                                     {% for genreId in movie.genre_ids %}
-                                        <a href="#">{{ movieGenres[genreId] }}</a>
+                                        <a href="{{ path('discover', {'genre': genreId}) }}">{{ genres[genreId] }}</a>
                                     {% endfor %}
 								    </span>
                                 </div>

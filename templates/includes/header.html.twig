@@ -17,7 +17,7 @@
                             <a href="{{ path('homepage') }}" class="header__nav-link">{{ 'homepage.title'|trans }}</a>
                         </li>
                         <li class="header__nav-item">
-                            <a href="{{ path('homepage') }}" class="header__nav-link">{{ 'discover.title'|trans }}</a>
+                            <a href="{{ path('discover') }}" class="header__nav-link">{{ 'discover.title'|trans }}</a>
                         </li>
                         <li class="header__nav-item">
                             <a href="{{ path('homepage') }}" class="header__nav-link">{{ 'watchlist.title'|trans }}</a>
@@ -28,9 +28,9 @@
 
                     <!-- header auth -->
                     <div class="header__auth">
-                        <form action="#" class="header__search">
-                            <input class="header__search-input" type="text" placeholder="{{ 'navbar.search'|trans }}">
-                            <button class="header__search-button" type="button">
+                        <form action="{{ path('search') }}" class="header__search" method="GET">
+                            <input name="q" class="header__search-input" type="text" placeholder="{{ 'navbar.search'|trans }}" />
+                            <button class="header__search-button" type="submit">
                                 <i class="icon ion-ios-search"></i>
                             </button>
                             <button class="header__search-close" type="button">

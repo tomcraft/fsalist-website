@@ -44,7 +44,7 @@ class Scrapper
         return strtoupper($lang);
     }
 
-    public static function mediaGenres(string $mediaType, string $lang = 'fr-FR') {
+    public static function queryGenres(string $mediaType, string $lang = 'fr-FR') {
         $data = array();
         $genres = self::cache("genre/$mediaType/list?language=$lang")->genres;
         foreach ($genres as $genre) {
@@ -53,12 +53,26 @@ class Scrapper
         return $data;
     }
 
-    public static function movieGenres(string $lang = 'fr-FR') {
-        return self::mediaGenres('movie', $lang);
+    public static function mediaGenres(string $lang = 'fr-FR') {
+        $movies = self::queryGenres('movie', $lang);
+        $shows = self::queryGenres('tv', $lang);
+        return $movies + $shows;
     }
 
-    public static function tvShowGenres(string $lang = 'fr-FR') {
-        return self::mediaGenres('tv', $lang);
+    public static function discoverMovie(array $options, string $lang = 'fr-FR', int $page = 1, string $region = null) {
+        if($region == null) $region = self::regionFromLang($lang);
+        $options['language'] = $lang;
+        $options['region'] = $region;
+        $options['page'] = $page;
+        return self::cache("discover/movie?".http_build_query($options));
+    }
+
+    public static function discoverTvShow(array $options, string $lang = 'fr-FR', int $page = 1, string $region = null) {
+        if($region == null) $region = self::regionFromLang($lang);
+        $options['language'] = $lang;
+        $options['region'] = $region;
+        $options['page'] = $page;
+        return self::cache("discover/tv?".http_build_query($options));
     }
 
     public static function searchAny(string $query, int $page = 1, string $lang = 'fr-FR') {
