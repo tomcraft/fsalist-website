@@ -16,20 +16,15 @@ class ScrapperExtension extends AbstractExtension
     {
         return [
             new TwigFilter('mediaURL', [$this, 'mediaURL']),
-            new TwigFilter('genreName', [$this, 'genreName']),
         ];
     }
 
     public function mediaURL($relativeUrl, string $size = 'original')
     {
         if ($relativeUrl == null || $relativeUrl == '') {
-            return '/img/covers/unknown.jpg';
+            $num = random_int(1, 6);
+            return "/img/covers/unknown-$num.jpg";
         }
         return Scrapper::imageUrl($relativeUrl, $size);
-    }
-
-    public function genreName(int $genreId, string $lang)
-    {
-        return Scrapper::genres($lang)[$genreId];
     }
 }

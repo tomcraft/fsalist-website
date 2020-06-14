@@ -321,7 +321,7 @@
                         <div class="col-6 col-sm-4 col-lg-6">
                             <div class="card">
                                 <div class="card__cover">
-                                    <img src="{{ show.poster_path != null ? show.poster_path|mediaURL('w342') : asset('img/covers/unknown.jpg') }}" alt="{{ show.name }}">
+                                    <img src="{{ show.poster_path|mediaURL('w342') }}" alt="{{ show.name }}">
                                     <a href="{{ media_url }}" class="card__play">
                                         <i class="icon ion-ios-resize"></i>
                                     </a>

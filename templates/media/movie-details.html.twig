@@ -18,7 +18,7 @@
                             <!-- card cover -->
                             <div class="col-12 col-sm-5 col-lg-6 col-xl-5">
                                 <div class="card__cover">
-                                    <img src="{{ movie.poster_path != null ? movie.poster_path|mediaURL('w342') : asset('img/covers/unknown.jpg') }}" alt="">
+                                    <img src="{{ movie.poster_path|mediaURL('w342') }}" alt="">
                                     {% if movie.vote_count > 0 %}
                                     <span class="card__rate card__rate--{{ movie.vote_average >= 7 ? 'green' : movie.vote_average >= 5 ? 'orange' : 'red' }}">{{ movie.vote_average }}</span>
                                     {% endif %}
@@ -309,7 +309,7 @@
                         <div class="col-6 col-sm-4 col-lg-6">
                             <div class="card">
                                 <div class="card__cover">
-                                    <img src="{{ movie.poster_path != null ? movie.poster_path|mediaURL('w342') : asset('img/covers/unknown.jpg') }}" alt="{{ movie.title }}">
+                                    <img src="{{ movie.poster_path|mediaURL('w342') }}" alt="{{ movie.title }}">
                                     <a href="{{ media_url }}" class="card__play">
                                         <i class="icon ion-ios-resize"></i>
                                     </a>
