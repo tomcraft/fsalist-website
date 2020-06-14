@@ -31,12 +31,7 @@ class WatchlistMedia
     /**
      * @ORM\Column(type="boolean")
      */
-    private $seen;
-
-    /**
-     * @ORM\Column(type="string", length=32)
-     */
-    private $shareId;
+    private $seen = false;
 
     public function getWatchlist(): ?Watchlist
     {
@@ -82,18 +77,6 @@ class WatchlistMedia
     public function setSeen(bool $seen): self
     {
         $this->seen = $seen;
-
-        return $this;
-    }
-
-    public function getShareId(): ?string
-    {
-        return $this->shareId;
-    }
-
-    public function setShareId(string $shareId): self
-    {
-        $this->shareId = $shareId;
 
         return $this;
     }

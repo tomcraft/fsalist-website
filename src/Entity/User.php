@@ -173,6 +173,7 @@ class User implements UserInterface
         $mainWatchlist = $this->watchlists->first();
         if (!$mainWatchlist) {
             $mainWatchlist = new Watchlist();
+            $mainWatchlist->setName("default");
             $this->addWatchlist($mainWatchlist);
         }
         return $mainWatchlist;

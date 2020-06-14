@@ -30,6 +30,11 @@ class Watchlist
     private $owner;
 
     /**
+     * @ORM\Column(type="string", length=32, nullable=true)
+     */
+    private $shareId;
+
+    /**
      * @ORM\OneToMany(targetEntity=WatchlistMedia::class, mappedBy="watchlist", orphanRemoval=true)
      */
     private $medias;
@@ -64,6 +69,18 @@ class Watchlist
     public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getShareId(): ?string
+    {
+        return $this->shareId;
+    }
+
+    public function setShareId(string $shareId): self
+    {
+        $this->shareId = $shareId;
 
         return $this;
     }
