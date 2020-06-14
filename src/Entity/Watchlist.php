@@ -24,18 +24,13 @@ class Watchlist
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="watchlists")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="watchlists")
      * @ORM\JoinColumn(nullable=false)
      */
     private $owner;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $type;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\WatchlistMedia", mappedBy="watchlist", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=WatchlistMedia::class, mappedBy="watchlist", orphanRemoval=true)
      */
     private $medias;
 
@@ -69,18 +64,6 @@ class Watchlist
     public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
-
-        return $this;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
 
         return $this;
     }

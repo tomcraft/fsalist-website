@@ -12,7 +12,7 @@ class WatchlistMedia
 
     /**
      * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity="App\Entity\Watchlist", inversedBy="medias")
+     * @ORM\ManyToOne(targetEntity=Watchlist::class, inversedBy="medias")
      * @ORM\JoinColumn(nullable=false)
      */
     private $watchlist;

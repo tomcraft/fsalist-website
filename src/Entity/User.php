@@ -44,16 +44,6 @@ class User implements UserInterface
     private $displayName;
 
     /**
-     * @ORM\OneToMany(targetEntity=MediaReview::class, mappedBy="author")
-     */
-    private $mediaReviews;
-
-    /**
-     * @ORM\OneToMany(targetEntity=MediaComment::class, mappedBy="author")
-     */
-    private $mediaComments;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $firstName;
@@ -63,8 +53,24 @@ class User implements UserInterface
      */
     private $lastName;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Watchlist::class, mappedBy="owner")
+     */
+    private $watchlists;
+
+    /**
+     * @ORM\OneToMany(targetEntity=MediaReview::class, mappedBy="author")
+     */
+    private $mediaReviews;
+
+    /**
+     * @ORM\OneToMany(targetEntity=MediaComment::class, mappedBy="author")
+     */
+    private $mediaComments;
+
     public function __construct()
     {
+        $this->watchlists = new ArrayCollection();
         $this->mediaReviews = new ArrayCollection();
         $this->mediaComments = new ArrayCollection();
     }
@@ -155,6 +161,37 @@ class User implements UserInterface
     public function setDisplayName(string $displayName): self
     {
         $this->displayName = $displayName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Watchlist[]
+     */
+    public function getWatchlists(): Collection
+    {
+        return $this->watchlists;
+    }
+
+    public function addWatchlist(Watchlist $watchlist): self
+    {
+        if (!$this->watchlists->contains($watchlist)) {
+            $this->watchlists[] = $watchlist;
+            $watchlist->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWatchlist(Watchlist $watchlist): self
+    {
+        if ($this->watchlists->contains($watchlist)) {
+            $this->watchlists->removeElement($watchlist);
+            // set the owning side to null (unless already changed)
+            if ($watchlist->getOwner() === $this) {
+                $watchlist->setOwner(null);
+            }
+        }
 
         return $this;
     }
