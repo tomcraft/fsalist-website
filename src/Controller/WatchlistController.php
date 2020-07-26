@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Watchlist;
 use App\Entity\WatchlistMedia;
+use App\Repository\Scrapper;
 use App\Security\AppAuthenticator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -52,10 +53,14 @@ class WatchlistController extends AbstractController
     {
         /** @var $user User */
         $user = $this->getUser();
+        $locale = $request->getLocale();
+        $watchlist = $this->getOrCreateWatchlist($user);
+        foreach ($watchlist->getMedias() as $media) {
+            $mediaData = $media->getMediaType() == 'movie' ? Scrapper::movieDetails($media->getMediaId(), $locale) : Scrapper::tvShowDetails($media->getMediaId(), $locale);
+            $media->setData($mediaData);
+        }
 
-
-        return $this->render('base.html.twig', [
-        ]);
+        return $this->render('watchlist/index.html.twig', [ 'medias' => $watchlist->getMedias() ]);
     }
 
     /**

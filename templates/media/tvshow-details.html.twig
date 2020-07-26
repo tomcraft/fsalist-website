@@ -6,10 +6,26 @@
         <div class="container">
             <div class="row">
                 <!-- title -->
-                <div class="col-12">
+                <div class="col-11">
                     <h1 class="section__title">{{ show.name }}</h1>
                 </div>
                 <!-- end title -->
+
+                <!-- watchlist management -->
+                {% if app.user %}
+                    <div class="col-1 text-right">
+                        <form method="post" action="{{ url(in_watchlist ? 'watchlist-media-remove' : 'watchlist-media-add') }}">
+                            <input type="hidden" name="mediaType" value="tv">
+                            <input type="hidden" name="mediaId" value="{{ show.id }}">
+                            {% if in_watchlist %}
+                                <button type="submit" class="media__manage_wl media__manage_wl--remove" title="{{ 'details.remove-from-watchlist'|trans }}"><i class="icon ion-ios-close-circle-outline"></i></button>
+                            {% else %}
+                                <button type="submit" class="media__manage_wl media__manage_wl--add" title="{{ 'details.add-to-watchlist'|trans }}"><i class="icon ion-ios-add-circle-outline"></i></button>
+                            {% endif %}
+                        </form>
+                    </div>
+                {% endif %}
+                <!-- end watchlist management -->
 
                 <!-- content -->
                 <div class="col-12 col-lg-6">
@@ -18,7 +34,7 @@
                             <!-- card cover -->
                             <div class="col-12 col-sm-5 col-lg-6 col-xl-5">
                                 <div class="card__cover">
-                                    <img src="{{ show.poster_path != null ? show.poster_path|mediaURL('w342') : asset('img/covers/unknown.jpg') }}" alt="">
+                                    <img src="{{ show.poster_path|mediaURL('w342') }}" alt="">
                                     {% if show.vote_count > 0 %}
                                     <span class="card__rate card__rate--{{ show.vote_average >= 7 ? 'green' : show.vote_average >= 5 ? 'orange' : 'red' }}">{{ show.vote_average }}</span>
                                     {% endif %}
