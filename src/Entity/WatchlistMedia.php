@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\Scrapper;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,12 +32,9 @@ class WatchlistMedia
     /**
      * @ORM\Column(type="boolean")
      */
-    private $seen;
+    private $seen = false;
 
-    /**
-     * @ORM\Column(type="string", length=32)
-     */
-    private $shareId;
+    private $data;
 
     public function getWatchlist(): ?Watchlist
     {
@@ -86,15 +84,14 @@ class WatchlistMedia
         return $this;
     }
 
-    public function getShareId(): ?string
+    public function setData($data): self
     {
-        return $this->shareId;
-    }
-
-    public function setShareId(string $shareId): self
-    {
-        $this->shareId = $shareId;
+        $this->data = $data;
 
         return $this;
+    }
+
+    public function getData() {
+        return $this->data;
     }
 }

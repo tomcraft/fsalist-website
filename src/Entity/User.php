@@ -166,6 +166,20 @@ class User implements UserInterface
     }
 
     /**
+     * @return Watchlist
+     */
+    public function getMainWatchlist(): Watchlist
+    {
+        $mainWatchlist = $this->watchlists->first();
+        if (!$mainWatchlist) {
+            $mainWatchlist = new Watchlist();
+            $mainWatchlist->setName("default");
+            $this->addWatchlist($mainWatchlist);
+        }
+        return $mainWatchlist;
+    }
+
+    /**
      * @return Collection|Watchlist[]
      */
     public function getWatchlists(): Collection

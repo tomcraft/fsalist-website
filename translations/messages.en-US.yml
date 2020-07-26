@@ -12,6 +12,9 @@ homepage:
   title: Home
   now-playing: <b>CURRENTLY</b> IN THEATERS
   whats-new: What's new ?
+  tabs:
+    upcomming-movies: Upcomming movies
+    on-air-shows: On air shows
 error:
   404: The page you are looking for is not available!
   403: You can't access this page
@@ -70,6 +73,8 @@ details:
   status: Status
   number-of-seasons: Seasons
   number-of-episodes: Episodes
+  add-to-watchlist: Add to my watchlist
+  remove-from-watchlist: Remove from my watchlist
 profile:
   title: Your profile
   tab-title: Profile
