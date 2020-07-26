@@ -12,6 +12,9 @@ homepage:
   title: Accueil
   now-playing: <b>ACTUELLEMENT</b> EN SALLES
   whats-new: Quoi de neuf ?
+  tabs:
+    upcomming-movies: Films à venir
+    on-air-shows: Séries en cours
 error:
   404: La page que vous cherchez n'est pas disponible
   403: L'accès à cette page a été bloqué
@@ -70,6 +73,8 @@ details:
   status: Statut
   number-of-seasons: Saisons
   number-of-episodes: Episodes
+  add-to-watchlist: Ajouter à ma watchlist
+  remove-from-watchlist: Retirer de ma watchlist
 profile:
   title: Votre profil
   tab-title: Profil

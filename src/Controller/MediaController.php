@@ -6,6 +6,9 @@ namespace App\Controller;
 
 use App\Entity\MediaComment;
 use App\Entity\MediaReview;
+use App\Entity\User;
+use App\Entity\Watchlist;
+use App\Entity\WatchlistMedia;
 use App\Repository\MediaReviewRepository;
 use App\Repository\Scrapper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -49,6 +52,8 @@ class MediaController extends AbstractController
      */
     public function movieDetails(Request $request, int $movieId)
     {
+        /** @var $user User */
+        $user = $this->getUser();
         $reviewForm = $this->handleReviewForm($request, 'movie', $movieId);
         if ($reviewForm == null) {
             return $this->redirect($request->getUri());
@@ -67,6 +72,13 @@ class MediaController extends AbstractController
         $commentRepository = $this->getDoctrine()->getRepository(MediaComment::class);
         $reviewRepository = $this->getDoctrine()->getRepository(MediaReview::class);
 
+        $watchlist = $user->getWatchlists()->first();
+        $in_watchlist = false;
+        if ($watchlist) {
+            $watchlistMediaRepository = $this->getDoctrine()->getRepository(WatchlistMedia::class);
+            $in_watchlist = $watchlistMediaRepository->findOneBy(['mediaType'=>'movie', 'mediaId'=>$movieId, 'watchlist'=>$watchlist]) != null;
+        }
+
         return $this->render('media/movie-details.html.twig', [
                 'movie' => $details,
                 'credits' => $credits,
@@ -76,7 +88,8 @@ class MediaController extends AbstractController
                 'videos' => $videos->results,
                 'comments' => $commentRepository->findBy(['mediaType' => 'movie', 'mediaId' => $movieId], ['created_at' => 'DESC']),
                 'reviews' => $reviewRepository->findBy(['mediaType' => 'movie', 'mediaId' => $movieId], ['created_at' => 'DESC']),
-                'reviewForm' => $reviewForm->createView()
+                'reviewForm' => $reviewForm->createView(),
+                'in_watchlist' => $in_watchlist
         ]);
     }
 
@@ -88,6 +101,8 @@ class MediaController extends AbstractController
      */
     public function tvShowDetails(Request $request, int $tvShowId)
     {
+        /** @var $user User */
+        $user = $this->getUser();
         $reviewForm = $this->handleReviewForm($request, 'tv', $tvShowId);
         if ($reviewForm == null) {
             return $this->redirect($request->getUri());
@@ -105,6 +120,13 @@ class MediaController extends AbstractController
         $commentRepository = $this->getDoctrine()->getRepository(MediaComment::class);
         $reviewRepository = $this->getDoctrine()->getRepository(MediaReview::class);
 
+        $watchlist = $user->getWatchlists()->first();
+        $in_watchlist = false;
+        if ($watchlist) {
+            $watchlistMediaRepository = $this->getDoctrine()->getRepository(WatchlistMedia::class);
+            $in_watchlist = $watchlistMediaRepository->findOneBy(['mediaType'=>'tv', 'mediaId'=>$tvShowId, 'watchlist'=>$watchlist]) != null;
+        }
+
         return $this->render('media/tvshow-details.html.twig', [
                 'show' => $details,
                 'recommendations' => $recommendations->results,
@@ -113,7 +135,8 @@ class MediaController extends AbstractController
                 'videos' => $videos->results,
                 'comments' => $commentRepository->findBy(['mediaType' => 'tv', 'mediaId' => $tvShowId], ['created_at' => 'DESC']),
                 'reviews' => $reviewRepository->findBy(['mediaType' => 'tv', 'mediaId' => $tvShowId], ['created_at' => 'DESC']),
-                'reviewForm' => $reviewForm->createView()
+                'reviewForm' => $reviewForm->createView(),
+                'in_watchlist' => $in_watchlist
         ]);
     }
 }

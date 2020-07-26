@@ -33,6 +33,15 @@ class WatchlistController extends AbstractController
         return $watchlist;
     }
 
+    private function redirectMedia($mediaType, $mediaId) {
+        if ($mediaType == 'movie') {
+            return $this->redirectToRoute('movie-details', ['movieId' => $mediaId]);
+        } else if ($mediaType == 'tv') {
+            return $this->redirectToRoute('tv-show-details', ['tvShowId' => $mediaId]);
+        }
+        return new Response('', 201);
+    }
+
     /**
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      * @Route("/watchlist", name="watchlist")
@@ -51,14 +60,14 @@ class WatchlistController extends AbstractController
 
     /**
      * @IsGranted("IS_AUTHENTICATED_FULLY")
-     * @Route("/watchlist/{mediaType}-{mediaId}/add", name="watchlist-media-add", methods={"POST"})
+     * @Route("/watchlist/add", name="watchlist-media-add", methods={"POST"})
      * @param Request $request
-     * @param string $mediaType
-     * @param int $mediaId
      * @return RedirectResponse|Response
      */
-    public function addMedia(Request $request, string $mediaType, int $mediaId)
+    public function addMedia(Request $request)
     {
+        $mediaType = $request->get('mediaType');
+        $mediaId = $request->get('mediaId');
         /** @var $user User */
         $user = $this->getUser();
         $watchlist = $this->getOrCreateWatchlist($user);
@@ -72,19 +81,21 @@ class WatchlistController extends AbstractController
         $entityManager->persist($media);
         $entityManager->flush();
 
-        return new Response('', 201);
+        return $this->redirectMedia($mediaType, $mediaId);
     }
 
     /**
      * @IsGranted("IS_AUTHENTICATED_FULLY")
-     * @Route("/watchlist/{mediaType}-{mediaId}/remove", name="watchlist-media-remove", methods={"POST"})
+     * @Route("/watchlist/remove", name="watchlist-media-remove", methods={"POST"})
      * @param Request $request
      * @param string $mediaType
      * @param int $mediaId
      * @return RedirectResponse|Response
      */
-    public function removeMedia(Request $request, string $mediaType, int $mediaId)
+    public function removeMedia(Request $request)
     {
+        $mediaType = $request->get('mediaType');
+        $mediaId = $request->get('mediaId');
         /** @var $user User */
         $user = $this->getUser();
         $watchlist = $this->getOrCreateWatchlist($user);
@@ -100,35 +111,37 @@ class WatchlistController extends AbstractController
             $entityManager->flush();
         }
 
-        return new Response('', 201);
+        return $this->redirectMedia($mediaType, $mediaId);
     }
 
     /**
      * @IsGranted("IS_AUTHENTICATED_FULLY")
-     * @Route("/watchlist/{mediaType}-{mediaId}/seen", name="watchlist-media-seen", methods={"POST"})
+     * @Route("/watchlist/seen", name="watchlist-media-seen", methods={"POST"})
      * @param Request $request
      * @param string $mediaType
      * @param int $mediaId
      * @return RedirectResponse|Response
      */
-    public function setSeenMedia(Request $request, string $mediaType, int $mediaId) {
-        return $this->_setSeenMedia($request, $mediaType, $mediaId, true);
+    public function setSeenMedia(Request $request) {
+        return $this->_setSeenMedia($request, true);
     }
 
     /**
      * @IsGranted("IS_AUTHENTICATED_FULLY")
-     * @Route("/watchlist/{mediaType}-{mediaId}/unseen", name="watchlist-media-unseen", methods={"POST"})
+     * @Route("/watchlist/unseen", name="watchlist-media-unseen", methods={"POST"})
      * @param Request $request
      * @param string $mediaType
      * @param int $mediaId
      * @return RedirectResponse|Response
      */
-    public function setUnSeenMedia(Request $request, string $mediaType, int $mediaId) {
-        return $this->_setSeenMedia($request, $mediaType, $mediaId, false);
+    public function setUnSeenMedia(Request $request) {
+        return $this->_setSeenMedia($request, false);
     }
 
-    private function _setSeenMedia(Request $request, string $mediaType, int $mediaId, bool $seen)
+    private function _setSeenMedia(Request $request, bool $seen)
     {
+        $mediaType = $request->get('mediaType');
+        $mediaId = $request->get('mediaId');
         /** @var $user User */
         $user = $this->getUser();
         $watchlist = $this->getOrCreateWatchlist($user);
