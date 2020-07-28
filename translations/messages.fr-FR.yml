@@ -15,6 +15,7 @@ homepage:
   tabs:
     upcomming-movies: Films à venir
     on-air-shows: Séries en cours
+    trending-animes: Animés tendances
 error:
   404: La page que vous cherchez n'est pas disponible
   403: L'accès à cette page a été bloqué

@@ -136,24 +136,10 @@
                 <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="3-tab">
                     <div class="row">
                         <!-- card -->
-                        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                            <div class="card">
-                                <div class="card__cover">
-                                    <img src="{{ asset('img/covers/unknown-1.jpg') }}" alt="">
-                                    <a href="#" class="card__play">
-                                        <i class="icon ion-ios-resize"></i>
-                                    </a>
-                                    <span class="card__rate card__rate--green">8.4</span>
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title"><a href="#">I Dream in Another Language</a></h3>
-                                    <span class="card__category">
-										<a href="#">Action</a>
-										<a href="#">Triler</a>
-									</span>
-                                </div>
-                            </div>
-                        </div>
+                        {% set card_layout = 'col-6 col-sm-4 col-md-3 col-xl-2' %}
+                        {% for displayMedia in trendingAnimes|slice(0, 18) %}
+                            {% include 'component/card.html.twig' %}
+                        {% endfor %}
                         <!-- end card -->
                     </div>
                 </div>
