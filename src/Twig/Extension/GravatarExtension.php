@@ -4,9 +4,7 @@
 namespace App\Twig\Extension;
 
 
-use App\Repository\Scrapper;
 use Twig\Extension\AbstractExtension;
-use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 // https://symfony.com/doc/current/templating/twig_extension.html
