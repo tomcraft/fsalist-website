@@ -64,12 +64,22 @@ details:
   origin-country: Pays d'origine
   recommendations: Vous aimerez peut-être...
   discover: En découvrir plus
-  comments: Discussion
-  reviews: Critiques
-  review-title: Titre
-  review-text: Votre critique...
-  review-rate: Note
-  pictures: Photos
+  comments:
+    tab: Discussion
+    placeholder: Votre texte...
+    reply: Répondre
+    quote: Citer
+  reviews:
+    tab: Critiques
+    title: Titre
+    text: Votre critique...
+    rate: Note
+  pictures:
+    tab: Photos
+    close: Fermer
+    fullscreen: Plain écran
+    previous: Précédent
+    next: Suivant
   status: Statut
   number-of-seasons: Saisons
   number-of-episodes: Episodes

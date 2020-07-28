@@ -64,12 +64,22 @@ details:
   origin-country: Country
   recommendations: You may also like...
   discover: Discover
-  comments: Comments
-  reviews: Reviews
-  review-title: Title
-  review-text: Your review...
-  review-rate: Rate
-  pictures: Photos
+  comments:
+    tab: Comments
+    placeholder: Your text...
+    reply: Reply
+    quote: Quote
+  reviews:
+    tab: Reviews
+    title: Title
+    text: Your review...
+    rate: Rate
+  pictures:
+    tab: Photos
+    close: Close
+    fullscreen: Toggle Fullscreen
+    previous: Previous
+    next: Next
   status: Status
   number-of-seasons: Seasons
   number-of-episodes: Episodes

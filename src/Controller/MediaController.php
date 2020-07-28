@@ -42,6 +42,28 @@ class MediaController extends AbstractController
         return $reviewForm;
     }
 
+    private function handleCommentForm(Request $request, string $mediaType, int $mediaId) {
+        $media = new MediaComment();
+        $commentForm = $this->createFormBuilder($media)
+                ->add('text', TextareaType::class)
+                ->add('parentComment', HiddenType::class)
+                ->getForm();
+        $commentForm->handleRequest($request);
+
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            $media->setCreatedAt(new \DateTime());
+            $media->setAuthor($this->getUser());
+            $media->setMediaType($mediaType);
+            $media->setMediaId($mediaId);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($media);
+            $entityManager->flush();
+            return null;
+        }
+        return $commentForm;
+    }
+
     /**
      * @Route("/movie/{movieId}", name="movie-details")
      * @param Request $request
@@ -50,8 +72,13 @@ class MediaController extends AbstractController
      */
     public function movieDetails(Request $request, int $movieId)
     {
-        $reviewForm = $this->handleReviewForm($request, 'movie', $movieId);
+        $mediaType = 'movie';
+        $reviewForm = $this->handleReviewForm($request, $mediaType, $movieId);
         if ($reviewForm == null) {
+            return $this->redirect($request->getUri());
+        }
+        $commentForm = $this->handleCommentForm($request, $mediaType, $movieId);
+        if ($commentForm == null) {
             return $this->redirect($request->getUri());
         }
 
@@ -75,7 +102,7 @@ class MediaController extends AbstractController
             $watchlist = $user->getWatchlists()->first();
             if ($watchlist) {
                 $watchlistMediaRepository = $this->getDoctrine()->getRepository(WatchlistMedia::class);
-                $in_watchlist = $watchlistMediaRepository->findOneBy(['mediaType' => 'movie', 'mediaId' => $movieId, 'watchlist' => $watchlist]) != null;
+                $in_watchlist = $watchlistMediaRepository->findOneBy(['mediaType' => $mediaType, 'mediaId' => $movieId, 'watchlist' => $watchlist]) != null;
             }
         }
 
@@ -86,8 +113,9 @@ class MediaController extends AbstractController
                 'genres' => $genres,
                 'images' => $images,
                 'videos' => $videos->results,
-                'comments' => $commentRepository->findBy(['mediaType' => 'movie', 'mediaId' => $movieId], ['created_at' => 'DESC']),
-                'reviews' => $reviewRepository->findBy(['mediaType' => 'movie', 'mediaId' => $movieId], ['created_at' => 'DESC']),
+                'comments' => $commentRepository->findBy(['mediaType' => $mediaType, 'mediaId' => $movieId], ['created_at' => 'ASC']),
+                'commentForm' => $commentForm->createView(),
+                'reviews' => $reviewRepository->findBy(['mediaType' => $mediaType, 'mediaId' => $movieId], ['created_at' => 'DESC']),
                 'reviewForm' => $reviewForm->createView(),
                 'in_watchlist' => $in_watchlist
         ]);
@@ -101,8 +129,13 @@ class MediaController extends AbstractController
      */
     public function tvShowDetails(Request $request, int $tvShowId)
     {
-        $reviewForm = $this->handleReviewForm($request, 'tv', $tvShowId);
+        $mediaType = 'tv';
+        $reviewForm = $this->handleReviewForm($request, $mediaType, $tvShowId);
         if ($reviewForm == null) {
+            return $this->redirect($request->getUri());
+        }
+        $commentForm = $this->handleCommentForm($request, $mediaType, $tvShowId);
+        if ($commentForm == null) {
             return $this->redirect($request->getUri());
         }
 
@@ -125,7 +158,7 @@ class MediaController extends AbstractController
             $watchlist = $user->getWatchlists()->first();
             if ($watchlist) {
                 $watchlistMediaRepository = $this->getDoctrine()->getRepository(WatchlistMedia::class);
-                $in_watchlist = $watchlistMediaRepository->findOneBy(['mediaType' => 'movie', 'mediaId' => $tvShowId, 'watchlist' => $watchlist]) != null;
+                $in_watchlist = $watchlistMediaRepository->findOneBy(['mediaType' => $mediaType, 'mediaId' => $tvShowId, 'watchlist' => $watchlist]) != null;
             }
         }
 
@@ -135,8 +168,9 @@ class MediaController extends AbstractController
                 'genres' => $genres,
                 'images' => $images,
                 'videos' => $videos->results,
-                'comments' => $commentRepository->findBy(['mediaType' => 'tv', 'mediaId' => $tvShowId], ['created_at' => 'DESC']),
-                'reviews' => $reviewRepository->findBy(['mediaType' => 'tv', 'mediaId' => $tvShowId], ['created_at' => 'DESC']),
+                'comments' => $commentRepository->findBy(['mediaType' => $mediaType, 'mediaId' => $tvShowId], ['created_at' => 'ASC']),
+                'commentForm' => $commentForm->createView(),
+                'reviews' => $reviewRepository->findBy(['mediaType' => $mediaType, 'mediaId' => $tvShowId], ['created_at' => 'DESC']),
                 'reviewForm' => $reviewForm->createView(),
                 'in_watchlist' => $in_watchlist
         ]);
