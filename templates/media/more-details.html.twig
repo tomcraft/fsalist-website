@@ -1,0 +1,184 @@
+
+    <!-- content -->
+    <section class="content">
+        <div class="content__head">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- content title -->
+                        <h2 class="content__title">{{ 'details.discover'|trans }}</h2>
+                        <!-- end content title -->
+
+                        <!-- content tabs nav -->
+                        <ul class="nav nav-tabs content__tabs" id="content__tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">{{ 'details.comments.tab'|trans }}</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">{{ 'details.reviews.tab'|trans }}</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">{{ 'details.pictures.tab'|trans }}</a>
+                            </li>
+                        </ul>
+                        <!-- end content tabs nav -->
+
+                        <!-- content mobile tabs nav -->
+                        <div class="content__mobile-tabs" id="content__mobile-tabs">
+                            <div class="content__mobile-tabs-btn dropdown-toggle" role="navigation" id="mobile-tabs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <input type="button" value="{{ 'details.comments'|trans }}">
+                                <span></span>
+                            </div>
+
+                            <div class="content__mobile-tabs-menu dropdown-menu" aria-labelledby="mobile-tabs">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item"><a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">{{ 'details.comments.tab'|trans }}</a></li>
+
+                                    <li class="nav-item"><a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">{{ 'details.reviews.tab'|trans }}</a></li>
+
+                                    <li class="nav-item"><a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">{{ 'details.pictures.tab'|trans }}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- end content mobile tabs nav -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8 col-xl-8">
+                    <!-- content tabs -->
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
+                            <div class="row">
+                                <!-- comments -->
+                                <div class="col-12">
+                                    <div class="comments">
+                                        <ul class="comments__list">
+                                            {% for comment in comments %}
+                                            <li class="comments__item">
+                                                <div class="comments__autor">
+                                                    <img class="comments__avatar" src="{{ gravatar(comment.author.email, 80, 'https://fsalist.com/img/user.png') }}" alt="">
+                                                    <span class="comments__name">{{ comment.author.displayName }}</span>
+                                                    <span class="comments__time">{{ comment.createdAt|date("d.m.Y, H:i") }}</span>
+                                                </div>
+                                                <p class="comments__text">{{ comment.text }}</p>
+                                                <div class="comments__actions">
+                                                    <div class="comments__rate">
+                                                        <button type="button"><i class="icon ion-md-thumbs-up"></i>{{ comment.thumbsUp }}</button>
+                                                        <button type="button">{{ comment.thumbsDown }}<i class="icon ion-md-thumbs-down"></i></button>
+                                                    </div>
+
+                                                    <button type="button"><i class="icon ion-ios-share-alt"></i>{{ 'details.comments.reply'|trans }}</button>
+                                                    <button type="button"><i class="icon ion-ios-quote"></i>{{ 'details.comments.quote'|trans }}</button>
+                                                </div>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+
+                                        {% if app.user %}
+                                        {{ form_start(commentForm, {'attr': {'id': 'comment-form', 'class': 'form'}}) }}
+                                        {{ form_widget(commentForm.text, {'attr': {'class': 'form__textarea', 'placeholder': 'details.comments.placeholder'}}) }}
+                                        <button type="submit" class="form__btn">{{ 'global.send'|trans }}</button>
+                                        {{ form_end(commentForm) }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <!-- end comments -->
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
+                            <div class="row">
+                                <!-- reviews -->
+                                <div class="col-12">
+                                    <div class="reviews">
+                                        <ul class="reviews__list">
+                                            {% for review in reviews %}
+                                            <li class="reviews__item">
+                                                <div class="reviews__autor">
+                                                    <img class="reviews__avatar" src="{{ gravatar(review.author.email, 80, 'https://fsalist.com/img/user.png') }}" alt="">
+                                                    <span class="reviews__name">{{ review.title }}</span>
+                                                    <span class="reviews__time">{{ review.createdAt|date("d.m.Y, H:i") }} by {{ review.author.displayName }}</span>
+
+                                                    <span class="reviews__rating reviews__rating--{{ review.rate >= 7 ? 'green' : review.rate >= 5 ? 'orange' : 'red' }}">{{ review.rate }}</span>
+                                                </div>
+                                                <p class="reviews__text">{{ review.text }}</p>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+
+                                        {% if app.user %}
+                                            {{ form_start(reviewForm, {'attr': {'id': 'review-form', 'class': 'form'}}) }}
+                                            {{ form_widget(reviewForm.title, {'attr': {'class': 'form__input', 'placeholder': 'details.reviews.title'}}) }}
+                                            {{ form_widget(reviewForm.text, {'attr': {'class': 'form__textarea', 'placeholder': 'details.reviews.text'}}) }}
+                                            <div class="form__slider">
+                                                <div class="form__slider-rating" id="slider__rating"></div>
+                                                <div class="form__slider-value" id="form__slider-value"></div>
+                                            </div>
+                                            {{ form_widget(reviewForm.rate) }}
+
+                                            <button type="submit" class="form__btn">{{ 'global.send'|trans }}</button>
+                                            {{ form_end(reviewForm) }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <!-- end reviews -->
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="3-tab">
+                            <!-- project gallery -->
+                            <div class="gallery" itemscope>
+                                <div class="row">
+                                    <!-- gallery item -->
+                                    {% for image in images.backdrops %}
+                                    <figure class="col-12 col-sm-6 col-xl-4" itemprop="associatedMedia" itemscope>
+                                        <a href="{{ image.file_path|mediaURL }}" itemprop="contentUrl" data-size="{{ image.width }}x{{ image.height }}">
+                                            <img src="{{ image.file_path|mediaURL('w300') }}" loading="lazy" itemprop="thumbnail" alt="Image description" />
+                                        </a>
+                                    </figure>
+                                    {% endfor %}
+                                    {% for image in images.posters %}
+                                    <figure class="col-12 col-sm-6 col-xl-4" itemprop="associatedMedia" itemscope>
+                                        <a href="{{ image.file_path|mediaURL }}" itemprop="contentUrl" data-size="{{ image.width }}x{{ image.height }}">
+                                            <img src="{{ image.file_path|mediaURL('w342') }}" loading="lazy" itemprop="thumbnail" alt="Image description" />
+                                        </a>
+                                    </figure>
+                                    {% endfor %}
+                                    <!-- end gallery item -->
+                                </div>
+                            </div>
+                            <!-- end project gallery -->
+                        </div>
+                    </div>
+                    <!-- end content tabs -->
+                </div>
+
+                <!-- sidebar -->
+                <div class="col-12 col-lg-4 col-xl-4">
+                    <div class="row">
+                        {% if recommendations %}
+                            <!-- section title -->
+                            <div class="col-12">
+                                <h2 class="section__title">{{ 'details.recommendations'|trans }}</h2>
+                            </div>
+                            <!-- end section title -->
+
+                            <!-- card -->
+                            {% set card_layout = 'col-6 col-sm-4 col-lg-6' %}
+                            {% for displayMedia in recommendations|slice(0, 8) %}
+                                {% include 'component/card.html.twig' %}
+                            {% endfor %}
+                            <!-- end card -->
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- end sidebar -->
+            </div>
+        </div>
+    </section>

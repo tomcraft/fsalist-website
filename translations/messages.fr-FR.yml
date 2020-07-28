@@ -15,6 +15,7 @@ homepage:
   tabs:
     upcomming-movies: Films à venir
     on-air-shows: Séries en cours
+    trending-animes: Animés tendances
 error:
   404: La page que vous cherchez n'est pas disponible
   403: L'accès à cette page a été bloqué
@@ -64,12 +65,22 @@ details:
   origin-country: Pays d'origine
   recommendations: Vous aimerez peut-être...
   discover: En découvrir plus
-  comments: Discussion
-  reviews: Critiques
-  review-title: Titre
-  review-text: Votre critique...
-  review-rate: Note
-  pictures: Photos
+  comments:
+    tab: Discussion
+    placeholder: Votre texte...
+    reply: Répondre
+    quote: Citer
+  reviews:
+    tab: Critiques
+    title: Titre
+    text: Votre critique...
+    rate: Note
+  pictures:
+    tab: Photos
+    close: Fermer
+    fullscreen: Plain écran
+    previous: Précédent
+    next: Suivant
   status: Statut
   number-of-seasons: Saisons
   number-of-episodes: Episodes

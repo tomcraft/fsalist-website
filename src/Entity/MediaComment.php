@@ -58,12 +58,12 @@ class MediaComment
     /**
      * @ORM\Column(type="integer")
      */
-    private $thumbsUp;
+    private $thumbsUp = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $thumbsDown;
+    private $thumbsDown = 0;
 
     public function __construct()
     {
