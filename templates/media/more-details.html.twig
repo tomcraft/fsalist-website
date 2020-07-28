@@ -170,35 +170,9 @@
                             <!-- end section title -->
 
                             <!-- card -->
-                            {% for recoMedia in recommendations|slice(0, 8) %}
-                                {% if recoMedia.title is defined %}
-                                    {% set media_name = recoMedia.title %}
-                                    {% set media_url = path('movie-details', {movieId: recoMedia.id}) %}
-                                {% elseif recoMedia.name is defined %}
-                                    {% set media_name = recoMedia.name %}
-                                    {% set media_url = path('tv-show-details', {tvShowId: recoMedia.id}) %}
-                                {% endif %}
-                                <div class="col-6 col-sm-4 col-lg-6">
-                                    <div class="card">
-                                        <div class="card__cover">
-                                            <img src="{{ recoMedia.poster_path|mediaURL('w342') }}" alt="{{ media_name }}">
-                                            <a href="{{ media_url }}" class="card__play">
-                                                <i class="icon ion-ios-resize"></i>
-                                            </a>
-                                            {% if recoMedia.vote_count > 0 %}
-                                                <span class="card__rate card__rate--{{ recoMedia.vote_average >= 7 ? 'green' : recoMedia.vote_average >= 5 ? 'orange' : 'red' }}">{{ recoMedia.vote_average }}</span>
-                                            {% endif %}
-                                        </div>
-                                        <div class="card__content">
-                                            <h3 class="card__title"><a href="{{ media_url }}">{{ media_name }}</a></h3>
-                                            <span class="card__category">
-                                    {% for genreId in recoMedia.genre_ids %}
-                                        <a href="{{ path('discover', {'genre': genreId}) }}">{{ genres[genreId] }}</a>
-                                    {% endfor %}
-								    </span>
-                                        </div>
-                                    </div>
-                                </div>
+                            {% set card_layout = 'col-6 col-sm-4 col-lg-6' %}
+                            {% for displayMedia in recommendations|slice(0, 8) %}
+                                {% include 'component/card.html.twig' %}
                             {% endfor %}
                             <!-- end card -->
                         {% endif %}

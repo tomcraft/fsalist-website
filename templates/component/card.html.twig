@@ -1,0 +1,26 @@
+{% if (displayMedia.media_type is defined and displayMedia.media_type == 'movie') or displayMedia.title is defined %}
+    {% set media_name = displayMedia.title %}
+    {% set media_url = path('movie-details', {movieId: displayMedia.id}) %}
+{% elseif (displayMedia.media_type is defined and displayMedia.media_type == 'tv') or displayMedia.name is defined %}
+    {% set media_name = displayMedia.name %}
+    {% set media_url = path('tv-show-details', {tvShowId: displayMedia.id}) %}
+{% endif %}
+<div class="{{ card_layout }}">
+    <div class="card">
+        <div class="card__cover">
+            <img src="{{ displayMedia.poster_path|mediaURL('w342') }}" alt="{{ media_name }}">
+            <a href="{{ media_url }}" class="card__play"><i class="icon ion-ios-resize"></i></a>
+            {% if displayMedia.vote_count > 0 %}
+                <span class="card__rate card__rate--{{ displayMedia.vote_average >= 7 ? 'green' : displayMedia.vote_average >= 5 ? 'orange' : 'red' }}">{{ displayMedia.vote_average }}</span>
+            {% endif %}
+        </div>
+        <div class="card__content">
+            <h3 class="card__title"><a href="{{ media_url }}">{{ media_name }}</a></h3>
+            <span class="card__category">
+            {% for genreId in displayMedia.genre_ids %}
+                <a href="{{ path('discover', {'genre': genreId}) }}">{{ genres[genreId] }}</a>
+            {% endfor %}
+			</span>
+        </div>
+    </div>
+</div>

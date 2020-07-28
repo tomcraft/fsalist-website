@@ -87,35 +87,9 @@
         <div class="container">
             <div class="row">
                 <!-- card -->
-                {% for media in medias %}
-                    {% if media.media_type == 'movie' %}
-                        {% set media_name = media.title %}
-                        {% set media_url = path('movie-details', {movieId: media.id}) %}
-                    {% elseif media.media_type == 'tv' %}
-                        {% set media_name = media.name %}
-                        {% set media_url = path('tv-show-details', {tvShowId: media.id}) %}
-                    {% endif %}
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <div class="card">
-                        <div class="card__cover">
-                            <img src="{{ media.poster_path|mediaURL('w342') }}" alt="">
-                            <a href="{{ media_url }}" class="card__play">
-                                <i class="icon ion-ios-resize"></i>
-                            </a>
-                            {% if media.vote_count > 0 %}
-                                <span class="card__rate card__rate--{{ media.vote_average >= 7 ? 'green' : media.vote_average >= 5 ? 'orange' : 'red' }}">{{ media.vote_average }}</span>
-                            {% endif %}
-                        </div>
-                        <div class="card__content">
-                            <h3 class="card__title"><a href="{{ media_url }}">{{ media_name }}</a></h3>
-                            <span class="card__category">
-								{% for genreId in media.genre_ids %}
-                                <a href="{{ path('discover', {'genre': genreId}) }}">{{ genres[genreId]|default('?') }}</a>
-                                {% endfor %}
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                {% set card_layout = 'col-6 col-sm-4 col-md-3 col-xl-2' %}
+                {% for displayMedia in medias %}
+                    {% include 'component/card.html.twig' %}
                 {% endfor %}
                 <!-- end card -->
 

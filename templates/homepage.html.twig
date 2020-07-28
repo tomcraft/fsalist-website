@@ -80,11 +80,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">TV SERIES</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">CARTOONS</a>
+                                <a class="nav-link" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">{{ 'homepage.tabs.trending-animes'|trans }}</a>
                             </li>
                         </ul>
                         <!-- end content tabs nav -->
@@ -102,9 +98,7 @@
 
                                     <li class="nav-item"><a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">{{ 'homepage.tabs.on-air-shows'|trans }}</a></li>
 
-                                    <li class="nav-item"><a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">TV SERIES</a></li>
-
-                                    <li class="nav-item"><a class="nav-link" id="4-tab" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">CARTOONS</a></li>
+                                    <li class="nav-item"><a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">{{ 'homepage.tabs.trending-animes'|trans }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -120,29 +114,9 @@
                 <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
                     <div class="row">
                         <!-- card -->
-                        {% for movie in upcomingMovies|slice(0, 18) %}
-                            {% set media_url = path('movie-details', {movieId: movie.id}) %}
-                        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                            <div class="card">
-                                <div class="card__cover">
-                                    <img src="{{ movie.poster_path|mediaURL('w342') }}" alt="">
-                                    <a href="{{ media_url }}" class="card__play">
-                                        <i class="icon ion-ios-resize"></i>
-                                    </a>
-                                    {% if movie.vote_count > 0 %}
-                                        <span class="card__rate card__rate--{{ movie.vote_average >= 7 ? 'green' : movie.vote_average >= 5 ? 'orange' : 'red' }}">{{ movie.vote_average }}</span>
-                                    {% endif %}
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title"><a href="{{ media_url }}">{{ movie.title }}</a></h3>
-                                    <span class="card__category">
-										{% for genreId in movie.genre_ids %}
-                                            <a href="{{ path('discover', {'genre': genreId}) }}">{{ genres[genreId] }}</a>
-                                        {% endfor %}
-									</span>
-                                </div>
-                            </div>
-                        </div>
+                        {% set card_layout = 'col-6 col-sm-4 col-md-3 col-xl-2' %}
+                        {% for displayMedia in upcomingMovies|slice(0, 18) %}
+                            {% include 'component/card.html.twig' %}
                         {% endfor %}
                         <!-- end card -->
                     </div>
@@ -151,29 +125,9 @@
                 <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
                     <div class="row">
                         <!-- card -->
-                        {% for show in onAirTvShows|slice(0, 18) %}
-                            {% set media_url = path('tv-show-details', {tvShowId: show.id}) %}
-                            <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                                <div class="card">
-                                    <div class="card__cover">
-                                        <img src="{{ show.poster_path|mediaURL('w342') }}" alt="">
-                                        <a href="{{ media_url }}" class="card__play">
-                                            <i class="icon ion-ios-resize"></i>
-                                        </a>
-                                        {% if show.vote_count > 0 %}
-                                            <span class="card__rate card__rate--{{ show.vote_average >= 7 ? 'green' : show.vote_average >= 5 ? 'orange' : 'red' }}">{{ show.vote_average }}</span>
-                                        {% endif %}
-                                    </div>
-                                    <div class="card__content">
-                                        <h3 class="card__title"><a href="{{ media_url }}">{{ show.name }}</a></h3>
-                                        <span class="card__category">
-										{% for genreId in show.genre_ids %}
-                                            <a href="{{ path('discover', {'genre': genreId}) }}">{{ genres[genreId]|default('?') }}</a>
-                                        {% endfor %}
-									    </span>
-                                    </div>
-                                </div>
-                            </div>
+                        {% set card_layout = 'col-6 col-sm-4 col-md-3 col-xl-2' %}
+                        {% for displayMedia in onAirTvShows|slice(0, 18) %}
+                            {% include 'component/card.html.twig' %}
                         {% endfor %}
                         <!-- end card -->
                     </div>
@@ -204,30 +158,6 @@
                     </div>
                 </div>
 
-                <div class="tab-pane fade" id="tab-4" role="tabpanel" aria-labelledby="4-tab">
-                    <div class="row">
-                        <!-- card -->
-                        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                            <div class="card">
-                                <div class="card__cover">
-                                    <img src="{{ asset('img/covers/unknown-1.jpg') }}" alt="">
-                                    <a href="#" class="card__play">
-                                        <i class="icon ion-ios-resize"></i>
-                                    </a>
-                                    <span class="card__rate card__rate--green">8.4</span>
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title"><a href="#">I Dream in Another Language</a></h3>
-                                    <span class="card__category">
-										<a href="#">Action</a>
-										<a href="#">Triler</a>
-									</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end card -->
-                    </div>
-                </div>
             </div>
             <!-- end content tabs -->
         </div>
