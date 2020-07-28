@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Watchlist;
 use App\Entity\WatchlistMedia;
 use App\Repository\Scrapper;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -49,12 +50,37 @@ class WatchlistController extends AbstractController
         $user = $this->getUser();
         $locale = $request->getLocale();
         $watchlist = $this->getOrCreateWatchlist($user);
+
+        return $this->renderWatchlist($watchlist, $locale, true);
+    }
+
+    /**
+     * @Route("/share/{shareId}", name="share_watchlist")
+     * @param Request $request
+     * @param string $shareId
+     * @return RedirectResponse|Response
+     */
+    public function sharedIndex(Request $request, string $shareId)
+    {
+        $locale = $request->getLocale();
+        $watchlist = $this->getDoctrine()->getRepository(Watchlist::class)->findOneBy(['shareId' => $shareId]);
+
+        if ($watchlist) {
+            return $this->renderWatchlist($watchlist, $locale, false);
+        }
+    }
+
+    private function renderWatchlist(Watchlist $watchlist, string $locale, bool $shareable) {
         foreach ($watchlist->getMedias() as $media) {
             $mediaData = $media->getMediaType() == 'movie' ? Scrapper::movieDetails($media->getMediaId(), $locale) : Scrapper::tvShowDetails($media->getMediaId(), $locale);
             $media->setData($mediaData);
         }
 
-        return $this->render('watchlist/index.html.twig', [ 'medias' => $watchlist->getMedias() ]);
+        return $this->render('watchlist/index.html.twig', [
+                'owner' => $watchlist->getOwner(),
+                'medias' => $watchlist->getMedias(),
+                'shareUrl' => $shareable ? $this->generateUrl('share_watchlist', ['shareId' => $watchlist->getShareId()]) : null
+        ]);
     }
 
     /**

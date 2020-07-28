@@ -824,7 +824,7 @@ ul {
   bottom: 0;
   left: 0;
   display: block;
-  background: url("../img/home/home__bg.jpg") no-repeat center/cover;
+  background: url("../img/home/home-bg-1.jpg") no-repeat center/cover;
   opacity: 0.05;
 }
 @media (min-width: 576px) {
@@ -1751,6 +1751,9 @@ ul {
 }
 .text-right {
     text-align: right;
+}
+.float-right {
+    float: right;
 }
 @media (min-width: 576px) {
   .card__meta {
@@ -2866,14 +2869,26 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   -ms-flex-align: center;
   align-items: center;
 }
-.contacts__social li {
+.contacts__social.to-right li {
   margin-right: 20px;
 }
-.contacts__social li:last-child {
+.contacts__social.to-right li:last-child {
   margin-left: 0;
+}
+.contacts__social.to-left li {
+  margin-left: 20px;
+}
+.contacts__social.to-left li:last-child {
+  margin-right: 0;
 }
 .contacts__social li.facebook a {
   color: #3b5999;
+}
+.contacts__social li.copy-link a {
+  color: #ffd80e;
+}
+.contacts__social li.twitter a {
+  color: #1da1f2;
 }
 .contacts__social li.instagram a {
   color: $clr2;
@@ -2883,9 +2898,6 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   color: #ffd80e;
-}
-.contacts__social li.twitter a {
-  color: #1da1f2;
 }
 .contacts__social li.vk a {
   color: #45668e;

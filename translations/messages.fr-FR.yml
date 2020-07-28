@@ -63,6 +63,12 @@ search:
   title: Recherche
 watchlist:
   title: Ma Watchlist
+  share:
+    title: Watchlist de owner
+    link: Copier le lien
+    twitter: Partager sur Twitter
+    facebook: Partager sur Facebook
+    text: 'Hey, regarde ma watchlist sur FSAList.com ! shareUrl'
 details:
   director: Réalisateur
   created-by: Créateur

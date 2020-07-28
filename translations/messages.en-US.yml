@@ -63,6 +63,12 @@ search:
   title: Search
 watchlist:
   title: My Watchlist
+  share:
+    title: owner's Watchlist
+    link: Copy link
+    twitter: Share via Twitter
+    facebook: Share via Facebook
+    text: 'Hey, look my watchlist on FSAList.com ! shareUrl'
 details:
   director: Director
   created-by: Creator

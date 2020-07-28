@@ -10,17 +10,19 @@
         <div class="card__cover">
             <img src="{{ displayMedia.poster_path|mediaURL('w342') }}" alt="{{ media_name }}">
             <a href="{{ media_url }}" class="card__play"><i class="icon ion-ios-resize"></i></a>
-            {% if displayMedia.vote_count > 0 %}
+            {% if (show_rate is not defined or show_rate) and displayMedia.vote_count > 0 %}
                 <span class="card__rate card__rate--{{ displayMedia.vote_average >= 7 ? 'green' : displayMedia.vote_average >= 5 ? 'orange' : 'red' }}">{{ displayMedia.vote_average }}</span>
             {% endif %}
         </div>
         <div class="card__content">
             <h3 class="card__title"><a href="{{ media_url }}">{{ media_name }}</a></h3>
+            {% if show_genres is not defined or show_genres %}
             <span class="card__category">
             {% for genreId in displayMedia.genre_ids %}
                 <a href="{{ path('discover', {'genre': genreId}) }}">{{ genres[genreId] }}</a>
             {% endfor %}
 			</span>
+            {% endif %}
         </div>
     </div>
 </div>

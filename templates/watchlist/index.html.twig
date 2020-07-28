@@ -1,36 +1,40 @@
-{% set title = 'watchlist.title'|trans %}
+{% if app.user == owner %}
+    {% set title = 'watchlist.title'|trans %}
+{% else %}
+    {% set title = 'watchlist.share.title'|trans({'owner': owner.displayName}) %}
+{% endif %}
 {% extends 'base.html.twig' %}
 {% block content %}
 {% include 'includes/breadcrumb.html.twig' %}
-    <div class="filter"></div>
+    <div class="filter">
+        {% if shareUrl is defined and shareUrl is not null %}
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="contacts__social to-left float-right">
+                        {% set shareUrl = app.request.schemeAndHttpHost ~ shareUrl %}
+                        {% set share_text = 'watchlist.share.text'|trans({'shareUrl': shareUrl})|url_encode %}
+                        <li class="copy-link" onclick="navigator.clipboard.writeText('{{ shareUrl }}')"><a title="{{ 'watchlist.share.link'|trans }}" href="#"><i class="icon ion-ios-link"></i></a></li>
+                        <li class="twitter"><a title="{{ 'watchlist.share.twitter'|trans }}" href="https://twitter.com/intent/tweet?text={{ share_text }}"><i class="icon ion-logo-twitter"></i></a></li>
+                        <li class="facebook"><a title="{{ 'watchlist.share.facebook'|trans }}" href="https://www.facebook.com/sharer/sharer.php?quote={{ share_text }}"><i class="icon ion-logo-facebook"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
     <!-- catalog -->
     <div class="catalog">
         <div class="container">
             <div class="row">
                 <!-- card -->
+                {% set card_layout = 'col-6 col-sm-4 col-md-3 col-xl-2' %}
+                {% set show_genres = false %}
+                {% set show_rate = false %}
                 {% for media in medias %}
-                    {% if media.mediaType == 'movie' %}
-                        {% set media_name = media.data.title %}
-                        {% set media_url = path('movie-details', {movieId: media.data.id}) %}
-                    {% elseif media.mediaType == 'tv' %}
-                        {% set media_name = media.data.name %}
-                        {% set media_url = path('tv-show-details', {tvShowId: media.data.id}) %}
-                    {% endif %}
-                <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                    <div class="card">
-                        <div class="card__cover">
-                            <img src="{{ media.data.poster_path|mediaURL('w342') }}" alt="">
-                            <a href="{{ media_url }}" class="card__play">
-                                <i class="icon ion-ios-resize"></i>
-                            </a>
-                        </div>
-                        <div class="card__content">
-                            <h3 class="card__title"><a href="{{ media_url }}">{{ media_name }}</a></h3>
-                        </div>
-                    </div>
-                </div>
+                    {% set displayMedia = media.data %}
+                    {% include 'component/card.html.twig' %}
                 {% endfor %}
-                <!-- end card -->
             </div>
         </div>
     </div>
