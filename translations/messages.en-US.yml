@@ -28,7 +28,7 @@ contact:
   text-hint: Type your message...
   info:
     title: Info
-    details: 'It is a long fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using.'
+    details: 'A content suggestion ? A correction to be made? <br> You will find here the various ways to contact us, we will do our best to answer as soon as possible.'
 auth:
   title:
     login: Login
@@ -52,6 +52,13 @@ mails:
     subject: Validation of your registration
 discover:
   title: Discover
+  filter:
+    genre: 'Genre:'
+    genre-hint: Select a genre
+    genre-all: All
+    rate: 'Note:'
+    release-year: 'Release year:'
+    apply-filter: 'Apply filter'
 search:
   title: Search
 watchlist:

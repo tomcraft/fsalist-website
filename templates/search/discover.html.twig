@@ -13,16 +13,16 @@
                         <div class="filter__items">
                             <!-- filter item -->
                             <div class="filter__item" id="filter__genre">
-                                <span class="filter__item-label">GENRE:</span>
+                                <span class="filter__item-label">{{ 'discover.filter.genre'|trans }}</span>
 
                                 <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-genre" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <input type="button" value="{{ last_form.genre is defined ? genres[last_form.genre] : 'Select a genre' }}">
+                                    <input type="button" value="{{ last_form.genre is defined ? genres[last_form.genre] : 'discover.filter.genre-hint'|trans }}">
                                     <input type="hidden" value="{{ last_form.genre|default }}" name="genre">
                                     <span></span>
                                 </div>
 
                                 <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-genre">
-                                    <li data-id="">Select a genre</li>
+                                    <li data-id="">{{ 'discover.filter.genre-all'|trans }}</li>
                                     {% for id, genre in genres %}
                                         <li data-id="{{ id }}">{{ genre }}</li>
                                     {% endfor %}
@@ -32,7 +32,7 @@
 
                             <!-- filter item -->
                             <div class="filter__item" id="filter__rate">
-                                <span class="filter__item-label">NOTE:</span>
+                                <span class="filter__item-label">{{ 'discover.filter.rate'|trans }}</span>
 
                                 <div class="filter__item-btn dropdown-toggle" role="button" id="filter-rate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <div class="filter__range">
@@ -52,7 +52,7 @@
 
                             <!-- filter item -->
                             <div class="filter__item" id="filter__year">
-                                <span class="filter__item-label">RELEASE YEAR:</span>
+                                <span class="filter__item-label">{{ 'discover.filter.release-year'|trans }}</span>
 
                                 <div class="filter__item-btn dropdown-toggle" role="button" id="filter-year" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <div class="filter__range">
@@ -72,7 +72,7 @@
                         </div>
 
                         <!-- filter btn -->
-                        <button class="filter__btn" type="submit">apply filter</button>
+                        <button class="filter__btn" type="submit">{{ 'discover.filter.apply-filter'|trans }}</button>
                         <!-- end filter btn -->
                     </div>
                     </form>
