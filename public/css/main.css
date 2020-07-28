@@ -2435,6 +2435,12 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 .profile__btn:hover {
   color: #fff;
 }
+.text__gray {
+
+}
+.btn__red {
+  border: 1px solid rgba(220, 19, 19, 0.8);
+}
 @media (min-width: 768px) {
   .profile {
     margin-bottom: 40px;

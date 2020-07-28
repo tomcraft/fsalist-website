@@ -14,7 +14,7 @@ class WatchlistMedia
     /**
      * @ORM\Id()
      * @ORM\ManyToOne(targetEntity=Watchlist::class, inversedBy="medias")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $watchlist;
 

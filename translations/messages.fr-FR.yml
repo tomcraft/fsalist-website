@@ -77,7 +77,9 @@ details:
   remove-from-watchlist: Retirer de ma watchlist
 profile:
   title: Votre profil
-  tab-title: Profil
+  tabs:
+    profile: Profil
+    security: Securité
   details:
     title: Détails du profil
     username: Surnom
@@ -89,3 +91,7 @@ profile:
     old: Ancien mot de passe
     new: Nouveau mot de passe
     new-confirm: Confirmer le mot de passe
+  delete-account:
+    title: Supprimer mon compte
+    info: Cette action est immédiate et définitive. Toutes vos données seront supprimées et ne pourront être restaurées (commentaires, critiques, watchlists, ...)
+    btn: Supprimer définitivement

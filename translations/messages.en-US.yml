@@ -77,7 +77,9 @@ details:
   remove-from-watchlist: Remove from my watchlist
 profile:
   title: Your profile
-  tab-title: Profile
+  tabs:
+    profile: Profile
+    security: Security
   details:
     title: Profile details
     username: Username
@@ -89,4 +91,7 @@ profile:
     old: Old Password
     new: New Password
     new-comfirm: Confirm New Password
-
+  delete-account:
+    title: Delete my account
+    info: This action is immediate and definitive. All your data will be deleted and cannot be recovered (comments, reviews, watchlists, ...)
+    btn: Delete definitly

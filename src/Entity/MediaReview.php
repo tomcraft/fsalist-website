@@ -19,7 +19,7 @@ class MediaReview
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="mediaReviews")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $author;
 

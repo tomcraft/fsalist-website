@@ -52,8 +52,6 @@ class MediaController extends AbstractController
      */
     public function movieDetails(Request $request, int $movieId)
     {
-        /** @var $user User */
-        $user = $this->getUser();
         $reviewForm = $this->handleReviewForm($request, 'movie', $movieId);
         if ($reviewForm == null) {
             return $this->redirect($request->getUri());
@@ -72,11 +70,15 @@ class MediaController extends AbstractController
         $commentRepository = $this->getDoctrine()->getRepository(MediaComment::class);
         $reviewRepository = $this->getDoctrine()->getRepository(MediaReview::class);
 
-        $watchlist = $user->getWatchlists()->first();
+        /** @var $user User */
+        $user = $this->getUser();
         $in_watchlist = false;
-        if ($watchlist) {
-            $watchlistMediaRepository = $this->getDoctrine()->getRepository(WatchlistMedia::class);
-            $in_watchlist = $watchlistMediaRepository->findOneBy(['mediaType'=>'movie', 'mediaId'=>$movieId, 'watchlist'=>$watchlist]) != null;
+        if ($user) {
+            $watchlist = $user->getWatchlists()->first();
+            if ($watchlist) {
+                $watchlistMediaRepository = $this->getDoctrine()->getRepository(WatchlistMedia::class);
+                $in_watchlist = $watchlistMediaRepository->findOneBy(['mediaType' => 'movie', 'mediaId' => $movieId, 'watchlist' => $watchlist]) != null;
+            }
         }
 
         return $this->render('media/movie-details.html.twig', [
@@ -101,8 +103,6 @@ class MediaController extends AbstractController
      */
     public function tvShowDetails(Request $request, int $tvShowId)
     {
-        /** @var $user User */
-        $user = $this->getUser();
         $reviewForm = $this->handleReviewForm($request, 'tv', $tvShowId);
         if ($reviewForm == null) {
             return $this->redirect($request->getUri());
@@ -120,11 +120,15 @@ class MediaController extends AbstractController
         $commentRepository = $this->getDoctrine()->getRepository(MediaComment::class);
         $reviewRepository = $this->getDoctrine()->getRepository(MediaReview::class);
 
-        $watchlist = $user->getWatchlists()->first();
+        /** @var $user User */
+        $user = $this->getUser();
         $in_watchlist = false;
-        if ($watchlist) {
-            $watchlistMediaRepository = $this->getDoctrine()->getRepository(WatchlistMedia::class);
-            $in_watchlist = $watchlistMediaRepository->findOneBy(['mediaType'=>'tv', 'mediaId'=>$tvShowId, 'watchlist'=>$watchlist]) != null;
+        if ($user) {
+            $watchlist = $user->getWatchlists()->first();
+            if ($watchlist) {
+                $watchlistMediaRepository = $this->getDoctrine()->getRepository(WatchlistMedia::class);
+                $in_watchlist = $watchlistMediaRepository->findOneBy(['mediaType' => 'movie', 'mediaId' => $tvShowId, 'watchlist' => $watchlist]) != null;
+            }
         }
 
         return $this->render('media/tvshow-details.html.twig', [
