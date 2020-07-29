@@ -43,4 +43,12 @@ class HomepageController extends AbstractController
         return $this->render('privacy.html.twig');
     }
 
+    /**
+     * @Route("/cookies", name="cookies")
+     */
+    public function cookies()
+    {
+        return $this->render('cookies.html.twig');
+    }
+
 }
